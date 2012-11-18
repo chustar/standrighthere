@@ -1,0 +1,12 @@
+﻿<vm:ChallengeViewModel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:standrighthere.ViewModels"
+    xmlns:mm="clr-namespace:standrighthere"
+>
+    <vm:ChallengeViewModel.Challenges>
+        <mm:Challenge Id="1" Title="another trial" Description="A new challenge to fight over!" Created="11/17/2012" Modified="11/17/2012" SolvedCount="3" MissedCount="2" />
+        <mm:Challenge Id="2" Title="On the edge" Description="Of the world" Created="11/17/2012" Modified="11/17/2012" SolvedCount="5" MissedCount="3" />
+        <mm:Challenge Id="3" Title="today you win" Description="You can hope" Created="11/17/2012" Modified="11/17/2012" SolvedCount="5" MissedCount="9" />
+    </vm:ChallengeViewModel.Challenges>
+</vm:ChallengeViewModel>
