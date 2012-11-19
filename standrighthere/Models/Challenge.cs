@@ -3,6 +3,7 @@ using System.Device.Location;
 using System.Windows.Controls;
 using Microsoft.WindowsAzure.MobileServices;
 using System.Runtime.Serialization;
+using standrighthere.Utilities;
 
 namespace standrighthere
 {
@@ -21,6 +22,14 @@ namespace standrighthere
         [DataMember(Name = "created")]
         public DateTime Created { get; set; }
         
+        public string CreatedRelative
+        { 
+            get
+            {
+                return TimeAgo.GetTimeAgo(Created);
+            }
+        }
+        
         [DataMember(Name = "modified")]
         public DateTime Modified { get; set; }
         
@@ -28,7 +37,7 @@ namespace standrighthere
         public GeoPosition<GeoCoordinate> Location { get; set; }
         
         [DataMember(Name = "image")]
-        public Image Image { get; set; }
+        public string Image { get; set; }
         
         [DataMember(Name = "user_id")]
         public MobileServiceUser UserId { get; set; }
