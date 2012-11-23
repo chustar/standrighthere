@@ -7,32 +7,47 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Microsoft.WindowsAzure.MobileServices;
+using standrighthere.ViewModels;
 
 namespace standrighthere
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class Home : PhoneApplicationPage
     {
         // Constructor
-        public MainPage()
+        public Home()
         {
             InitializeComponent();
 
             // Set the data context of the listbox control to the sample data
-            DataContext = App.ViewModel;
+            DataContext = HomeViewModel;
         }
 
         // Load data for the ViewModel Items
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (!App.ViewModel.IsDataLoaded)
+            if (!HomeViewModel.IsDataLoaded)
             {
-                App.ViewModel.LoadData();
+                HomeViewModel.LoadData();
             }
         }
 
         private void viewfinderCanvas_Tap_1(object sender, System.Windows.Input.GestureEventArgs e)
         {
 
+        }
+
+        private HomeViewModel homeViewModel;
+        private HomeViewModel HomeViewModel
+        {
+            get
+            {
+                if (homeViewModel == null)
+                {
+                    homeViewModel = new HomeViewModel();
+                }
+                return homeViewModel;
+            }
         }
     }
 }

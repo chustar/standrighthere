@@ -8,6 +8,8 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
+using standrighthere.ViewModels;
+
 namespace standrighthere
 {
     public partial class ChallengeList : PhoneApplicationPage
@@ -15,6 +17,20 @@ namespace standrighthere
         public ChallengeList()
         {
             InitializeComponent();
+            DataContext = ChallengeListViewModel;
+        }
+        
+        private ChallengeListViewModel challengeListViewModel;
+        private ChallengeListViewModel ChallengeListViewModel
+        {
+            get
+            {
+                if (challengeListViewModel == null)
+                {
+                    challengeListViewModel = new ChallengeListViewModel();
+                }
+                return challengeListViewModel;
+            }
         }
     }
 }

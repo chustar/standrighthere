@@ -22,11 +22,11 @@
             </phone:PivotItem>
 
             <phone:PivotItem Header="new">
-                <UserControls:ChallengeListUserControl DataContext="{ViewModels:ChallengeViewModel}" />
+                <UserControls:ChallengeListUserControl DataContext="{Binding NewChallenges}" />
             </phone:PivotItem>
 
             <phone:PivotItem Header="top">
-                <UserControls:ChallengeListUserControl DataContext="{ViewModels:ChallengeViewModel}" />
+                <UserControls:ChallengeListUserControl DataContext="{Binding TopChallenges}" />
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>
