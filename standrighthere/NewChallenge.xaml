@@ -13,28 +13,32 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <Grid x:Name="LayoutRoot" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="STAND RIGHT HERE" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="new challenge" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
+            <StackPanel Grid.Row="0" Margin="12,17,0,28">
+                <TextBlock Text="STAND RIGHT HERE" Style="{StaticResource PhoneTextNormalStyle}"/>
+                <TextBlock Text="new challenge" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            </StackPanel>
 
-        <!--ContentPanel - place additional content here-->
-        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="0,0,0,0">
-            <Image Source="SampleData\Images\img1.jpg" Height="373" Width="373" Stretch="Fill" Margin="0,0,0,0" />
-            <TextBox Width="400" InputScope="Text" Margin="0,12,0,0" BorderThickness="0,0,0,0" FontSize="32" Text="challeneg title" />
-            <TextBox Width="400" Height="100" InputScope="Text" Margin="0,12,0,0" BorderThickness="0,0,0,0" FontSize="24" Text="challeneg description" />
-        </StackPanel>
-    </Grid>
+            <ScrollViewer Grid.Row="1">
+                <StackPanel x:Name="ContentPanel" Margin="0,0,0,0">
+                    <Image x:Name="Image" Source="SampleData\Images\img1.jpg" Height="373" Width="373" Stretch="Fill" Margin="0,0,0,0" Tap="StartCameraCapture" />
+                    <TextBlock Text="title" Width="373" Margin="0,12,0,0" />
+                    <TextBox x:Name="Title" Width="400" InputScope="Text" Margin="0,0,0,0" BorderThickness="0,0,0,0" FontSize="32" />
+                    <TextBlock Text="description" Width="373" Margin="0,12,0,0" />
+                    <TextBox x:Name="Description" Width="400" Height="100" InputScope="Text" Margin="0,12,0,0" BorderThickness="0,0,0,0" FontSize="24" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="Toolkit.Content\ApplicationBar.Check.png" Text="Save" />
-            <shell:ApplicationBarIconButton IconUri="Toolkit.Content\ApplicationBar.Cancel.png" Text="Cancel" />
+            <shell:ApplicationBarIconButton IconUri="Toolkit.Content\ApplicationBar.Check.png" Text="Save" Click="CreateChallenege" />
+            <shell:ApplicationBarIconButton IconUri="Toolkit.Content\ApplicationBar.Cancel.png" Text="Cancel" Click="CancelChallenge" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

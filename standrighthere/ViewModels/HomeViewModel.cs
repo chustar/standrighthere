@@ -11,9 +11,6 @@ namespace standrighthere.ViewModels
     {
         public HomeViewModel()
         {
-#if DESIGN
-            _WireDesignerData();
-#endif
         }
 
         private MobileServiceCollectionView<Challenge> Challenges { get; set; }

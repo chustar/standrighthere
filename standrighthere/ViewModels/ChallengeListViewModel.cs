@@ -7,9 +7,6 @@ namespace standrighthere.ViewModels
     {
         public ChallengeListViewModel()
         {
-#if DESIGN
-            _WireDesignerData();
-#endif
         }
 
         public ChallengeViewModel NearbyChallenges { get; private set; }

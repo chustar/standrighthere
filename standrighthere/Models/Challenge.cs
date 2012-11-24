@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Device.Location;
+using Windows.Devices.Geolocation;
 using System.Windows.Controls;
 using Microsoft.WindowsAzure.MobileServices;
 using System.Runtime.Serialization;
@@ -32,9 +32,9 @@ namespace standrighthere
         
         [DataMember(Name = "modified")]
         public DateTime Modified { get; set; }
-        
+
         [DataMember(Name = "location")]
-        public GeoPosition<GeoCoordinate> Location { get; set; }
+        public Geoposition Location { get; set; }
         
         [DataMember(Name = "image")]
         public string Image { get; set; }

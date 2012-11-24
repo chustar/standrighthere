@@ -117,10 +117,10 @@
     </Compile>
     <Compile Include="Utilities\TimeAgo.cs" />
     <Compile Include="ViewModels\ChallengeViewModel.cs" />
-    <Compile Include="ViewModels\ChallengeViewModel.sampledata.cs" />
+    <None Include="ViewModels\ChallengeViewModel.sampledata.cs" />
     <Compile Include="ViewModels\ChallengeListViewModel.cs" />
-    <Compile Include="ViewModels\ChallengeListViewModel.sampledata.cs" />
-    <Compile Include="ViewModels\HomeViewModel.sampledata.cs" />
+    <None Include="ViewModels\ChallengeListViewModel.sampledata.cs" />
+    <None Include="ViewModels\HomeViewModel.sampledata.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
