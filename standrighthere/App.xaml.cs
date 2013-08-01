@@ -8,25 +8,25 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using Microsoft.WindowsAzure.MobileServices;
+using System.Threading.Tasks;
+
+using Parse;
 
 using standrighthere.Resources;
+using standrighthere.Models;
 using standrighthere.ViewModels;
 
 namespace standrighthere
 {
     public partial class App : Application
     {
-        public static MobileServiceClient MobileService = new MobileServiceClient(
-            "https://standrighthere.azure-mobile.net/",
-            "kIyLXkRvDCyrZZQxtsHkKQoLsEcWFk86"
-        ); 
-
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
+
+        public static UserDetailsViewModel UserDetails { get; private set; }
 
         /// <summary>
         /// Constructor for the Application object.
@@ -65,23 +65,35 @@ namespace standrighthere
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+            ParseClient.Initialize("NhHOvcjOPfG9X4LKbaAID5FDeK4azh4ztb9LFdtt", "yubl7PgLAdxXs60WWHDi7iSURCzLRR0xJGTAn9MS");
+            this.Startup += (sender, args) =>
+            {
+                ParseAnalytics.TrackAppOpens(RootFrame);
+            };
         }
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            var testObject = new ParseObject("TestObject");
+            testObject["foo"] = "bar";
+            testObject.SaveAsync();
         }
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
-        private void Application_Activated(object sender, ActivatedEventArgs e)
+        private async void Application_Activated(object sender, ActivatedEventArgs e)
         {
-            // Ensure that application state is restored appropriately
+             //Ensure that application state is restored appropriately
+            if (!App.UserDetails.IsDataLoaded)
+            {
+                await App.UserDetails.LoadData();
+            }
             //if (!App.ViewModel.IsDataLoaded)
-           // {
+            //{
             //    App.ViewModel.LoadData();
-           // }
+            //}
         }
 
         // Code to execute when the application is deactivated (sent to background)

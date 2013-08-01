@@ -1,5 +1,8 @@
 ﻿using Microsoft.WindowsAzure.MobileServices;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+
+using standrighthere.Models;
 
 namespace standrighthere.ViewModels
 {
@@ -9,12 +12,9 @@ namespace standrighthere.ViewModels
         {
         }
 
-        public MobileServiceCollectionView<Challenge> Challenges { get; private set; }
-        private IMobileServiceTable<Challenge> challengeTable = App.MobileService.GetTable<Challenge>();
 
         internal void LoadData()
         {
-            Challenges = challengeTable.ToCollectionView();
         }
     }
 }

@@ -26,7 +26,7 @@ public class UserChallengesSubmitted
 public class UserChallengesSolved
 {
     [DataMember(Name = "user_id")]
-    public MobileServiceUser UserId { get; set; }
+    public int UserId { get; set; }
 
     [DataMember(Name = "challege_id")]
     public int ChallengeId { get; set; }

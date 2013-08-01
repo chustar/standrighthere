@@ -1,15 +1,18 @@
 ﻿using Microsoft.WindowsAzure.MobileServices;
 using System.Runtime.Serialization;
 
-[DataTable (Name = "points")]
-public class Point
+namespace standrighthere.Models
 {
-    [DataMember (Name = "id")]
-    public int Id { get; set; }
+    [DataTable(Name = "points")]
+    public class Point
+    {
+        [DataMember(Name = "id")]
+        public int Id { get; set; }
 
-    [DataMember (Name = "name")]
-    public string Badge { get; set; }
+        [DataMember(Name = "name")]
+        public string Badge { get; set; }
 
-    [DataMember (Name = "points")]
-    public int Points { get; set; }
+        [DataMember(Name = "points")]
+        public int Points { get; set; }
+    }
 }

@@ -5,7 +5,7 @@ using Microsoft.WindowsAzure.MobileServices;
 using System.Runtime.Serialization;
 using standrighthere.Utilities;
 
-namespace standrighthere
+namespace standrighthere.Models
 {
     [DataTable(Name = "challenges")]
     public class Challenge
@@ -24,28 +24,45 @@ namespace standrighthere
         
         public string CreatedRelative
         { 
-            get
-            {
-                return TimeAgo.GetTimeAgo(Created);
-            }
+            get { return TimeAgo.GetTimeAgo(Created); }
         }
         
         [DataMember(Name = "modified")]
         public DateTime Modified { get; set; }
-
-        [DataMember(Name = "location")]
-        public Geoposition Location { get; set; }
         
-        [DataMember(Name = "image")]
-        public string Image { get; set; }
+        public string ModifiedRelative
+        { 
+            get { return TimeAgo.GetTimeAgo(Modified); }
+        }
+        
+        [DataMember(Name = "latitude")]
+        public string Latitude { get; set; }
+
+        [DataMember(Name = "longitude")]
+        public string Longitude { get; set; }
+
+        //[DataMember(Name = "location")]
+        //public Geoposition Location { get; set; }
+        
+ //       [DataMember(Name = "image")]
+//        public string Image { get; set; }
         
         [DataMember(Name = "user_id")]
-        public MobileServiceUser UserId { get; set; }
+        public int UserId { get; set; }
 
         [DataMember(Name = "solved_count")]
         public int SolvedCount { get; set; }
 
         [DataMember(Name = "missed_count")]
         public int MissedCount { get; set; }
+        
+        [DataMember(Name = "resource_name")]
+        public string ResourceName { get; set; }
+        
+        [DataMember(Name = "container_name")]
+        public string ContainerName { get; set; }
+       
+        [DataMember(Name = "sas")]
+        public string SAS { get; set; }
     }
 }

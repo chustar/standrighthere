@@ -1,32 +1,33 @@
 ﻿using Microsoft.WindowsAzure.MobileServices;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using standrighthere.Models;
+using Parse;
 
 namespace standrighthere.ViewModels
 {
     public partial class HomeViewModel
     {
-        public HomeViewModel()
-        {
-        }
-
-        private MobileServiceCollectionView<Challenge> Challenges { get; set; }
-
-        private IMobileServiceTable<Challenge> challengeTable = App.MobileService.GetTable<Challenge>();
+        private IEnumerable<ParseObject> Challenges { get; set; }
 
         public bool IsDataLoaded
         {
             get; private set;
         }
 
-        public void LoadData()
+        public async void LoadData()
         {
-            Challenges = challengeTable.ToCollectionView();
+            var query = ParseObject.GetQuery("Challenges");
+            query.WhereNear("location", ParseUser.CurrentUser.Get<ParseGeoPoint>("location"));
+            query.Limit(20);
+            Challenges = await query.FindAsync();
+
             IsDataLoaded = true;
         }
-
     }
 }

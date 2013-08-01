@@ -9,17 +9,16 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.WindowsAzure.MobileServices;
 using standrighthere.ViewModels;
+using System.Threading.Tasks;
 
 namespace standrighthere
 {
     public partial class Home : PhoneApplicationPage
     {
-        // Constructor
         public Home()
         {
             InitializeComponent();
 
-            // Set the data context of the listbox control to the sample data
             DataContext = HomeViewModel;
         }
 
@@ -30,11 +29,15 @@ namespace standrighthere
             {
                 HomeViewModel.LoadData();
             }
-        }
 
-        private void viewfinderCanvas_Tap_1(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-
+            if (UserDetails == null)
+            {
+                UserDetails.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else
+            {
+                Join.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         private HomeViewModel homeViewModel;
@@ -47,6 +50,29 @@ namespace standrighthere
                     homeViewModel = new HomeViewModel();
                 }
                 return homeViewModel;
+            }
+        }
+
+        private void Home_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (UserDetails == null)
+            {
+                Join.Visibility = System.Windows.Visibility.Visible;
+                MessageBoxResult m = MessageBox.Show(
+                    "You do not seem to be registered on stand right here.\n" +
+                    "Would you like to register?",
+                    "Register",
+                    MessageBoxButton.OKCancel
+                    );
+
+                if (m == MessageBoxResult.OK)
+                {
+                    NavigationService.Navigate(new Uri("/NewUser.xaml", UriKind.Relative));
+                }
+            }
+            else
+            {
+                UserDetails.Visibility = System.Windows.Visibility.Visible;
             }
         }
     }

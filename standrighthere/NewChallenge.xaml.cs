@@ -5,10 +5,17 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using System.IO.IsolatedStorage;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using Windows.Devices.Geolocation;
+
+using standrighthere.ViewModels;
+using standrighthere.Models;
+using System.IO;
+using Windows.Storage.Streams;
+using Parse;
 
 namespace standrighthere
 {
@@ -17,8 +24,6 @@ namespace standrighthere
         public NewChallenge()
         {
             InitializeComponent();
-            Challenge = new Challenge();
-
             OneShotLocation();
         }
 
@@ -26,7 +31,7 @@ namespace standrighthere
         {
             CameraCaptureTask camera = new CameraCaptureTask();
             camera.Completed += new EventHandler<PhotoResult>(OnCameraCaptureCompleted);
-
+        
             camera.Show();
         }
 
@@ -34,27 +39,29 @@ namespace standrighthere
         {
             if (e.TaskResult == TaskResult.OK)
             {
-                Challenge.Image = e.OriginalFileName;
+                filename = e.OriginalFileName;
                 
                 System.Windows.Media.Imaging.BitmapImage bmp = new System.Windows.Media.Imaging.BitmapImage();
                 bmp.SetSource(e.ChosenPhoto);
                 Image.Source = bmp;
+                Image.Width = 373;
+                Image.Height= 373;
+                ChosenPhotoStream = e.ChosenPhoto.AsInputStream();
             }
         }
 
         private async void OneShotLocation()
         {
-            Geolocator geolocator = new Geolocator();
+            var geolocator = new Geolocator();
             geolocator.DesiredAccuracyInMeters = 50;
 
             try
             {
-                Geoposition geoposition = await geolocator.GetGeopositionAsync(
+                var geoposition = await geolocator.GetGeopositionAsync(
                     maximumAge: TimeSpan.FromMinutes(5),
                     timeout: TimeSpan.FromSeconds(10)
                     );
-
-                Challenge.Location = geoposition;
+                geoPoint = new ParseGeoPoint(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
             }
             catch (Exception ex)
             {
@@ -70,27 +77,66 @@ namespace standrighthere
             }
         }
 
-        private void CreateChallenege(object sender, EventArgs e)
+        private async void appBarSave_click(object sender, EventArgs e)
         {
-            if (Challenge.Location == null)
+            if (geoPoint.Equals(new ParseGeoPoint()))
             {
                 MessageBox.Show("Still finding your location. Please try again...");
             }
-            Challenge.Title = Title.Text;
-            Challenge.Description = Description.Text;
-            Challenge.Created = DateTime.Now;
-            Challenge.Modified = DateTime.Now;
-            return;
+            else if (filename == null)
+            {
+                MessageBox.Show("You need a picture to create a new challenge.");
+            }
+            else if (Title.Text.Trim() == "")
+            {
+                MessageBox.Show("You need to name the challenge.");
+            }
+            else
+            {
+                var image = new ParseFile(Title.Text, ChosenPhotoStream.AsStreamForRead());
+                await image.SaveAsync();
+
+                var challenge = new ParseObject("Challenge")
+                {
+                    {"user", App.UserDetails},
+                    {"title", Title.Text},
+                    {"description", Description.Text},
+                    {"image", image}
+                };
+                await challenge.SaveAsync();
+
+                if (challenge.ObjectId != "")
+                {
+                    NavigationService.Navigate(new Uri("/Challenge.xaml?id=" + challenge.ObjectId, UriKind.Relative));
+                }
+                else
+                {
+                    MessageBox.Show("We couldn't save the challenge. Please try again.");
+                }
+            }
         }
 
         private void CancelChallenge(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("Home.xaml"));
+            NavigationService.Navigate(new Uri("/Home.xaml", UriKind.Relative));
         }
 
-        public Challenge Challenge
+        private ParseGeoPoint geoPoint;
+        private string filename;
+        private ChallengeViewModel challengeViewModel;
+        private ChallengeViewModel ChallengeViewModel
         {
-            get; set;
+            get
+            {
+                if (challengeViewModel == null)
+                {
+                    challengeViewModel = new ChallengeViewModel();
+                }
+                return challengeViewModel;
+            }
         }
+
+        IInputStream ChosenPhotoStream;
+
     }
 }

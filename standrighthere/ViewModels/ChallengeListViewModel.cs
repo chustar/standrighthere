@@ -1,5 +1,9 @@
-﻿using Microsoft.WindowsAzure.MobileServices;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+
+using standrighthere.Models;
+using System.Collections.Generic;
+using Parse;
+using System.Threading.Tasks;
 
 namespace standrighthere.ViewModels
 {
@@ -9,23 +13,20 @@ namespace standrighthere.ViewModels
         {
         }
 
-        public ChallengeViewModel NearbyChallenges { get; private set; }
-        public ChallengeViewModel NewChallenges { get; private set; }
-        public ChallengeViewModel TopChallenges { get; private set; }
+        public IEnumerable<ParseObject> NearbyChallenges { get; private set; }
 
         public bool IsDataLoaded
         {
             get; private set;
         }
         
-        public void LoadData()
+        public async Task LoadData()
         {
-            NearbyChallenges.LoadData();
-            NewChallenges.LoadData();
-            TopChallenges.LoadData();
-
+            var query = ParseObject.GetQuery("Challenges");
+            query.WhereNear("location", ParseUser.CurrentUser.Get<ParseGeoPoint>("location"));
+            query.Limit(20);
+            NearbyChallenges = await query.FindAsync();
             IsDataLoaded = true;
         }
-
     }
 }

@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="standrighthere.Controls.UserDetailsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=LayoutTransformer"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    >
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Rectangle Width="172" Height="172" Fill="Black" Margin="0,0,24,0" />
+                <StackPanel>
+                    <TextBlock Text="chustar" FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}" Foreground="black" />
+                    <TextBlock Text="joined 3 years ago" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="black" Margin="0,0,0,0" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <toolkit:LayoutTransformer>
+                    <toolkit:LayoutTransformer.LayoutTransform>
+                        <RotateTransform Angle="270"/>
+                    </toolkit:LayoutTransformer.LayoutTransform>
+                    <TextBlock Foreground="black" Text="posted" FontSize="{StaticResource PhoneFontSizeExtraLarge}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </toolkit:LayoutTransformer>
+                <TextBlock Foreground="black" Text="{Binding Path=PostedCount}" FontSize="{StaticResource PhoneFontSizeHuge}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <toolkit:LayoutTransformer>
+                    <toolkit:LayoutTransformer.LayoutTransform>
+                        <RotateTransform Angle="270"/>
+                    </toolkit:LayoutTransformer.LayoutTransform>
+                    <TextBlock Foreground="black" Text="solved" FontSize="{StaticResource PhoneFontSizeExtraLarge}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </toolkit:LayoutTransformer>
+                <Grid>
+                    <TextBlock Foreground="black" Text="{Binding Path=SolvedCount}" FontSize="{StaticResource PhoneFontSizeHuge}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Grid>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
