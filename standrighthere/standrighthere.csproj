@@ -107,10 +107,6 @@
     <Compile Include="Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Challenge.cs" />
-    <Compile Include="Models\UserDetails.cs" />
-    <Compile Include="Models\ManyToMany.cs" />
-    <Compile Include="Models\Point.cs" />
     <Compile Include="NewChallenge.xaml.cs">
       <DependentUpon>NewChallenge.xaml</DependentUpon>
     </Compile>

@@ -1,20 +1,72 @@
-﻿using Microsoft.WindowsAzure.MobileServices;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-
-using standrighthere.Models;
+﻿using Parse;
+using standrighthere.Utilities;
+using System;
 
 namespace standrighthere.ViewModels
 {
     public partial class ChallengeViewModel
     {
-        public ChallengeViewModel()
+        public ChallengeViewModel(ParseObject challengeObject)
         {
+            _challengeObject = challengeObject;
         }
 
-
-        internal void LoadData()
+        public string Title
         {
+            get
+            {
+                return _challengeObject.Get<string>("title");
+            }
         }
+
+        public string Description
+        {
+            get
+            {
+                return _challengeObject.Get<string>("description");
+            }
+        }
+
+        public Uri Image
+        {
+            get
+            {
+                return _challengeObject.Get<ParseFile>("image").Url;
+            }
+        }
+
+        public UserDetailsViewModel UserDetails
+        {
+            get
+            {
+                return new UserDetailsViewModel(_challengeObject.Get<ParseUser>("user"));
+            }
+        }
+        
+        public ParseGeoPoint GeoPoint
+        {
+            get
+            {
+                return _challengeObject.Get<ParseGeoPoint>("geoPoint");
+            }
+        }
+        
+        public DateTime Created
+        {
+            get
+            {
+                return _challengeObject.Get<DateTime>("createdAt");
+            }
+        }
+
+        public string CreatedRelative
+        {
+            get
+            {
+                return TimeAgo.GetTimeAgo(_challengeObject.Get<DateTime>("createdAt"));
+            }
+        }
+
+        private ParseObject _challengeObject;
     }
 }

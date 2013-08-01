@@ -15,29 +15,6 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
-    <phone:PhoneApplicationPage.Resources>
-        <Style TargetType="TextBlock" x:Name="TextboxTitleStyle">
-            <Setter Property="Margin" Value="12,0,0,0" />
-            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}" />
-        </Style>
-        <Style TargetType="Button" x:Name="ActionButton">
-            <Setter Property="Margin" Value="0,32,0,0" />
-            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeLarge}" />
-        </Style>
-        <Style TargetType="toolkit:PhoneTextBox" x:Name="FormTextBox">
-            <Setter Property="Margin" Value="0,0,0,32" />
-            <Setter Property="HintStyle">
-                <Setter.Value>
-                    <Style TargetType="ContentControl">
-                        <Setter Property="FontStyle" Value="Italic" />
-                    </Style>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeLarge}" />
-            <Setter Property="Width" Value="380" />
-        </Style>
-    </phone:PhoneApplicationPage.Resources>
-    
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

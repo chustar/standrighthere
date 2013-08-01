@@ -1,6 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Application p1:Class="standrighthere.App" xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone" xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone" xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:p1="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-  <!--Application Resources-->
+<Application 
+    p1:Class="standrighthere.App" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone" 
+    xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+    xmlns:p1="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <!--Application Resources-->
   <Application.Resources>
     <sys:Double p1:Key="PanoramaItemHeaderFontSize">66</sys:Double>
     <Style p1:Key="PanoramaItemHeaderTextStyle" TargetType="TextBlock">
@@ -8,6 +16,30 @@
       <Setter Property="FontSize" Value="{StaticResource PanoramaItemHeaderFontSize}" />
       <Setter Property="CharacterSpacing" Value="-35" />
     </Style>
+      
+    <Style TargetType="TextBlock" x:Name="TextboxTitleStyle">
+        <Setter Property="Margin" Value="12,0,0,0" />
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}" />
+    </Style>
+      
+    <Style TargetType="Button" x:Name="ActionButton">
+        <Setter Property="Margin" Value="0,32,0,0" />
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeLarge}" />
+    </Style>
+      
+    <Style TargetType="toolkit:PhoneTextBox" x:Name="FormTextBox">
+        <Setter Property="Margin" Value="0,0,0,32" />
+        <Setter Property="HintStyle">
+            <Setter.Value>
+                <Style TargetType="ContentControl">
+                    <Setter Property="FontStyle" Value="Italic" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeLarge}" />
+        <Setter Property="Width" Value="380" />
+    </Style>
+      
     <local:LocalizedStrings xmlns:local="clr-namespace:standrighthere" p1:Key="LocalizedStrings" />
   </Application.Resources>
   <Application.ApplicationLifetimeObjects>

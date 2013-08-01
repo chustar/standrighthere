@@ -1,34 +1,45 @@
 ﻿using System.Collections.Generic;
 
-using standrighthere.Models;
 using Parse;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace standrighthere.ViewModels
 {
     public partial class UserDetailsViewModel
     {
-        public ParseObject UserDetails { get; private set; }
-        public IEnumerable<ParseObject> SubmittedChallenges { get; private set; }
-        public IEnumerable<ParseObject> SolvedChallenges { get; private set; }
+        public UserDetailsViewModel(ParseUser user)
+        {
+            _user = user;
+
+            LoadData();
+        }
+
+        public ObservableCollection<ChallengeViewModel> SolvedChallenges { get; private set; }
+        public ObservableCollection<ChallengeViewModel> SubmittedChallenges { get; private set; }
 
         public bool IsDataLoaded { get; private set; }
 
         public async Task LoadData()
         {
-            UserDetails = ParseUser.CurrentUser;
-            if (UserDetails != null)
+            var solvedChallenges = await (from challenge in ParseObject.GetQuery("Challenges")
+                                      where challenge.Get<ParseUser>("user") == _user
+                                      select challenge).FindAsync();
+            foreach (var challenge in solvedChallenges)
             {
-                SolvedChallenges = await (from challenge in ParseObject.GetQuery("Challenges")
-                                          where challenge.Get<ParseUser>("user") == ParseUser.CurrentUser
-                                          select challenge).FindAsync();
-
-                SubmittedChallenges = await (from userChallenge in ParseObject.GetQuery("UserChallengesSolved")
-                                             where userChallenge.Get<ParseUser>("user") == ParseUser.CurrentUser
-                                             select userChallenge).FindAsync();
+                SolvedChallenges.Add(new ChallengeViewModel(challenge));
             }
 
+            var submittedChallenges = await (from userChallenge in ParseObject.GetQuery("UserChallengesSolved")
+                                         where userChallenge.Get<ParseUser>("user") == _user
+                                         select userChallenge).FindAsync();
+            foreach (var challenge in submittedChallenges)
+            {
+                SubmittedChallenges.Add(new ChallengeViewModel(challenge));
+            }
             IsDataLoaded = true;
         }
+
+        private ParseUser _user;
     }
 }

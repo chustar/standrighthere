@@ -9,7 +9,6 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Threading.Tasks;
 
-using standrighthere.Models;
 using Parse;
 
 namespace standrighthere

@@ -27,9 +27,9 @@
             <ScrollViewer Grid.Row="1">
                 <StackPanel x:Name="ContentPanel" Margin="0,0,0,0">
                     <Image x:Name="Image" Source="Assets\Metro-Camera-256.png" Height="156" Width="200" Stretch="Uniform"  Margin="0,24,0,0" Tap="StartCameraCapture" />
-                    <TextBlock Text="title" Width="373" Margin="0,12,0,0" />
+                    <TextBlock Text="TITLE" Style="{StaticResource TextboxTitleStyle}" Width="373" Margin="0,12,0,0" />
                     <TextBox x:Name="Title" Width="400" InputScope="Text" Margin="0,0,0,0" BorderThickness="0,0,0,0" FontSize="32" />
-                    <TextBlock Text="description" Width="373" Margin="0,12,0,0" />
+                    <TextBlock Text="DESCRIPTION" Style="{StaticResource TextboxTitleStyle}" Width="373" Margin="0,12,0,0" />
                     <TextBox x:Name="Description" Width="400" Height="100" InputScope="Text" Margin="0,0,0,0" BorderThickness="0,0,0,0" FontSize="24" />
                 </StackPanel>
             </ScrollViewer>
@@ -37,7 +37,7 @@
     
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True">
-            <shell:ApplicationBarIconButton IconUri="Toolkit.Content\ApplicationBar.Check.png" Text="Save" Click="appBarSave_click" />
+            <shell:ApplicationBarIconButton IconUri="Toolkit.Content\ApplicationBar.Check.png" Text="Save" Click="SaveChallenge" />
             <shell:ApplicationBarIconButton IconUri="Toolkit.Content\ApplicationBar.Cancel.png" Text="Cancel" Click="CancelChallenge" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

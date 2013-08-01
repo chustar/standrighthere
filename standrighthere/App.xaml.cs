@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using Parse;
 
 using standrighthere.Resources;
-using standrighthere.Models;
 using standrighthere.ViewModels;
 
 namespace standrighthere

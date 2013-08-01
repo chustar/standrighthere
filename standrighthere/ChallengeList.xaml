@@ -18,15 +18,24 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <phone:Pivot Title="STAND RIGHT HERE">
             <phone:PivotItem Header="nearby">
-                <UserControls:ChallengeListUserControl DataContext="{Binding NearbyChallenges}" />
-            </phone:PivotItem>
-
-            <phone:PivotItem Header="new">
-                <UserControls:ChallengeListUserControl DataContext="{Binding NewChallenges}" />
-            </phone:PivotItem>
-
-            <phone:PivotItem Header="top">
-                <UserControls:ChallengeListUserControl DataContext="{Binding TopChallenges}" />
+                <phone:LongListSelector Margin="0,-20,0,0" ItemsSource="{Binding Challenges}">
+                    <phone:LongListSelector.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="12,2,0,4" Height="105" Width="432">
+                                <!--Replace rectangle with image-->
+                                <Image Source="{Binding Image}" Height="99" Width="99" />
+                                <StackPanel Width="311" Margin="8,-7,0,0">
+                                    <TextBlock Text="{Binding Title}" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextTrimming="WordEllipsis" />
+                                    <TextBlock Text="{Binding Description}" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" TextTrimming="WordEllipsis" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding CreatedRelative}" TextWrapping="Wrap" Width="100" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                        <TextBlock Text="chustar" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </phone:LongListSelector.ItemTemplate>
+                </phone:LongListSelector>
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>

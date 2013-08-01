@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using Microsoft.WindowsAzure.MobileServices;
 using standrighthere.ViewModels;
 using System.Threading.Tasks;
 

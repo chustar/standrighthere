@@ -12,7 +12,6 @@ using Microsoft.Phone.Tasks;
 using Windows.Devices.Geolocation;
 
 using standrighthere.ViewModels;
-using standrighthere.Models;
 using System.IO;
 using Windows.Storage.Streams;
 using Parse;
@@ -77,7 +76,7 @@ namespace standrighthere
             }
         }
 
-        private async void appBarSave_click(object sender, EventArgs e)
+        private async void SaveChallenge(object sender, EventArgs e)
         {
             if (geoPoint.Equals(new ParseGeoPoint()))
             {
@@ -101,7 +100,8 @@ namespace standrighthere
                     {"user", App.UserDetails},
                     {"title", Title.Text},
                     {"description", Description.Text},
-                    {"image", image}
+                    {"image", image},
+                    {"geoPoint", geoPoint}
                 };
                 await challenge.SaveAsync();
 
