@@ -20,12 +20,15 @@ namespace standrighthere.ViewModels
 
         public async void LoadData()
         {
-            var query = ParseObject.GetQuery("Challenges");
-            query.WhereNear("location", ParseUser.CurrentUser.Get<ParseGeoPoint>("location"));
-            query.Limit(20);
-            Challenges = await query.FindAsync();
+            if (ParseUser.CurrentUser != null)
+            {
+                var query = ParseObject.GetQuery("Challenges");
+                query.WhereNear("location", ParseUser.CurrentUser.Get<ParseGeoPoint>("location"));
+                query.Limit(20);
+                Challenges = await query.FindAsync();
 
-            IsDataLoaded = true;
+                IsDataLoaded = true;
+            }
         }
     }
 }

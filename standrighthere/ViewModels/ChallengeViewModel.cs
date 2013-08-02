@@ -35,11 +35,11 @@ namespace standrighthere.ViewModels
             }
         }
 
-        public UserDetailsViewModel UserDetails
+        public UserViewModel UserDetails
         {
             get
             {
-                return new UserDetailsViewModel(_challengeObject.Get<ParseUser>("user"));
+                return new UserViewModel(_challengeObject.Get<ParseUser>("user"));
             }
         }
         

@@ -25,7 +25,7 @@ namespace standrighthere
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
-        public static UserDetailsViewModel UserDetails { get; private set; }
+        public static UserViewModel UserDetails { get; private set; }
 
         /// <summary>
         /// Constructor for the Application object.
@@ -82,13 +82,13 @@ namespace standrighthere
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
-        private async void Application_Activated(object sender, ActivatedEventArgs e)
+        private void Application_Activated(object sender, ActivatedEventArgs e)
         {
              //Ensure that application state is restored appropriately
-            if (!App.UserDetails.IsDataLoaded)
-            {
-                await App.UserDetails.LoadData();
-            }
+            //if (!App.UserDetails.IsDataLoaded)
+            //{
+            //    await App.UserDetails.LoadData();
+            //}
             //if (!App.ViewModel.IsDataLoaded)
             //{
             //    App.ViewModel.LoadData();

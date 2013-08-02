@@ -3,19 +3,58 @@
 using Parse;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using standrighthere.Utilities;
 
 namespace standrighthere.ViewModels
 {
-    public partial class UserDetailsViewModel
+    public partial class UserViewModel
     {
-        public UserDetailsViewModel(ParseUser user)
+        public UserViewModel(ParseUser user)
         {
             _user = user;
-
-            LoadData();
         }
 
+        public string Username
+        {
+            get
+            {
+                return _user.Username;
+            }
+        }
+
+        public int SolvedCount
+        {
+            get
+            {
+                return (from challenge in ParseObject.GetQuery("Challenges")
+                        where challenge.Get<ParseUser>("user") == _user
+                        select challenge).CountAsync().Result;
+
+            }
+        }
+        
+        public int SubmittedCount
+        {
+            get
+            {
+                return (from challenge in ParseObject.GetQuery("UserChallengesSolved")
+                        where challenge.Get<ParseUser>("user") == _user
+                        select challenge).CountAsync().Result;
+                
+            }
+        }
+        
+        public string CreatedRelative
+        {
+            get
+            {
+                return TimeAgo.GetTimeAgo(_user.CreatedAt.Value);
+                
+            }
+        }
+/*
         public ObservableCollection<ChallengeViewModel> SolvedChallenges { get; private set; }
+
         public ObservableCollection<ChallengeViewModel> SubmittedChallenges { get; private set; }
 
         public bool IsDataLoaded { get; private set; }
@@ -39,7 +78,7 @@ namespace standrighthere.ViewModels
             }
             IsDataLoaded = true;
         }
-
+*/
         private ParseUser _user;
     }
 }

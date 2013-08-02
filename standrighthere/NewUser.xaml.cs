@@ -37,7 +37,7 @@ namespace standrighthere
                     {"user", user}
                 };
                 await userDetails.SaveAsync();
-                await App.UserDetails.LoadData();
+                //await App.UserDetails.LoadData();
 
                 NavigationService.Navigate(new Uri("/UserDetailsManager.xaml", UriKind.Relative));
             }
@@ -52,7 +52,7 @@ namespace standrighthere
             try
             {
                 await ParseUser.LogInAsync(LoginUsername.Text, LoginPassword.Password);
-                await App.UserDetails.LoadData();
+                //await App.UserDetails.LoadData();
 
                 NavigationService.Navigate(new Uri("/UserDetailsManager.xaml", UriKind.Relative));
             }

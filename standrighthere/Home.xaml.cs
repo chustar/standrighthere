@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using standrighthere.ViewModels;
 using System.Threading.Tasks;
+using Parse;
 
 namespace standrighthere
 {
@@ -28,15 +29,6 @@ namespace standrighthere
             {
                 HomeViewModel.LoadData();
             }
-
-            if (UserDetails == null)
-            {
-                UserDetails.Visibility = System.Windows.Visibility.Collapsed;
-            }
-            else
-            {
-                Join.Visibility = System.Windows.Visibility.Collapsed;
-            }
         }
 
         private HomeViewModel homeViewModel;
@@ -52,9 +44,11 @@ namespace standrighthere
             }
         }
 
+        public UserViewModel UserViewModel { get; private set; }
+
         private void Home_Loaded(object sender, RoutedEventArgs e)
         {
-            if (UserDetails == null)
+            if (ParseUser.CurrentUser == null)
             {
                 Join.Visibility = System.Windows.Visibility.Visible;
                 MessageBoxResult m = MessageBox.Show(

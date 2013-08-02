@@ -53,7 +53,7 @@
             
             <phone:PanoramaItem Header="me">
                 <Grid>
-                    <HyperlinkButton x:Name="Join" Content="Join" NavigateUri="/NewUser.xaml" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,12,0,0"/>
+                    <HyperlinkButton x:Name="Join" Content="Join" NavigateUri="/NewUser.xaml" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,12,0,0" Visibility="Collapsed" />
                     <Controls:UserDetailsControl x:Name="UserDetails" Visibility="Collapsed" />
                 </Grid>
             </phone:PanoramaItem>

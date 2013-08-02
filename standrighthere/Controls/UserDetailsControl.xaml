@@ -16,8 +16,8 @@
             <StackPanel Orientation="Horizontal">
                 <Rectangle Width="172" Height="172" Fill="Black" Margin="0,0,24,0" />
                 <StackPanel>
-                    <TextBlock Text="chustar" FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}" Foreground="black" />
-                    <TextBlock Text="joined 3 years ago" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="black" Margin="0,0,0,0" />
+                    <TextBlock Text="{Binding Username}" FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}" Foreground="black" />
+                    <TextBlock Text="{Binding CreatedRelative}" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="black" Margin="0,0,0,0" />
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
@@ -25,9 +25,9 @@
                     <toolkit:LayoutTransformer.LayoutTransform>
                         <RotateTransform Angle="270"/>
                     </toolkit:LayoutTransformer.LayoutTransform>
-                    <TextBlock Foreground="black" Text="posted" FontSize="{StaticResource PhoneFontSizeExtraLarge}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <TextBlock Text="submitted" FontSize="{StaticResource PhoneFontSizeExtraLarge}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </toolkit:LayoutTransformer>
-                <TextBlock Foreground="black" Text="{Binding Path=PostedCount}" FontSize="{StaticResource PhoneFontSizeHuge}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <TextBlock Text="{Binding SubmittedCount}" FontSize="{StaticResource PhoneFontSizeHuge}" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
@@ -35,10 +35,10 @@
                     <toolkit:LayoutTransformer.LayoutTransform>
                         <RotateTransform Angle="270"/>
                     </toolkit:LayoutTransformer.LayoutTransform>
-                    <TextBlock Foreground="black" Text="solved" FontSize="{StaticResource PhoneFontSizeExtraLarge}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <TextBlock Text="solved" FontSize="{StaticResource PhoneFontSizeExtraLarge}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </toolkit:LayoutTransformer>
                 <Grid>
-                    <TextBlock Foreground="black" Text="{Binding Path=SolvedCount}" FontSize="{StaticResource PhoneFontSizeHuge}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <TextBlock Text="{Binding SolvedCount}" FontSize="{StaticResource PhoneFontSizeHuge}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Grid>
             </StackPanel>
         </StackPanel>

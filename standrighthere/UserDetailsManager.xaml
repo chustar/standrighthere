@@ -21,14 +21,6 @@
             <phone:PivotItem Header="me">
                 <UserControls:UserDetailsControl DataContext="{Binding UserDetails}" />
             </phone:PivotItem>
-
-            <phone:PivotItem Header="submitted">
-                <UserControls:ChallengeListUserControl DataContext="{Binding SubmittedChallenges}" />
-            </phone:PivotItem>
-
-            <phone:PivotItem Header="solved">
-                <UserControls:ChallengeListUserControl DataContext="{Binding SolvedChallenges}" />
-            </phone:PivotItem>
         </phone:Pivot>
     </Grid>
     

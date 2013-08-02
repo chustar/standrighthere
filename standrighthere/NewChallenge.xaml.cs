@@ -123,18 +123,6 @@ namespace standrighthere
 
         private ParseGeoPoint geoPoint;
         private string filename;
-        private ChallengeViewModel challengeViewModel;
-        private ChallengeViewModel ChallengeViewModel
-        {
-            get
-            {
-                if (challengeViewModel == null)
-                {
-                    challengeViewModel = new ChallengeViewModel();
-                }
-                return challengeViewModel;
-            }
-        }
 
         IInputStream ChosenPhotoStream;
 
