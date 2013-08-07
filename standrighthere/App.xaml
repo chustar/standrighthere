@@ -20,6 +20,7 @@
     <Style TargetType="TextBlock" x:Name="TextboxTitleStyle">
         <Setter Property="Margin" Value="12,0,0,0" />
         <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}" />
+        <Setter Property="Foreground" Value="Gray" />
     </Style>
       
     <Style TargetType="Button" x:Name="ActionButton">
@@ -37,7 +38,22 @@
             </Setter.Value>
         </Setter>
         <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeLarge}" />
-        <Setter Property="Width" Value="380" />
+        <Setter Property="Width" Value="420" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+        
+      <Style x:Key="HyperlinkStyle" TargetType="HyperlinkButton">
+        <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0,0,0,15" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="HyperlinkButton">
+                    <TextBlock Text="{TemplateBinding Content}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"  TextWrapping="Wrap" TextTrimming="WordEllipsis" MaxHeight="156" Margin="14,0" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
       
     <local:LocalizedStrings xmlns:local="clr-namespace:standrighthere" p1:Key="LocalizedStrings" />

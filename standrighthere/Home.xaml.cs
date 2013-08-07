@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using standrighthere.ViewModels;
 using System.Threading.Tasks;
 using Parse;
+using Microsoft.Phone.Tasks;
 
 namespace standrighthere
 {
@@ -66,6 +67,26 @@ namespace standrighthere
             else
             {
                 UserDetails.Visibility = System.Windows.Visibility.Visible;
+            }
+        }
+
+        private void Begin_PhotoChooserTask(object sender, RoutedEventArgs e)
+        {
+            var photoTask = new PhotoChooserTask();
+            photoTask.PixelHeight = 480;
+            photoTask.PixelWidth = 480;
+            photoTask.ShowCamera = true;
+            photoTask.Completed += Complete_PhotoChooserTask;
+
+            photoTask.Show();
+        }
+
+        void Complete_PhotoChooserTask(object sender, PhotoResult e)
+        {
+            if (e.TaskResult == TaskResult.OK)
+            {
+                App.PhotoResult = e;
+                NavigationService.Navigate(new Uri("/NewChallenge.xaml", UriKind.Relative));
             }
         }
     }

@@ -14,6 +14,7 @@ using Parse;
 
 using standrighthere.Resources;
 using standrighthere.ViewModels;
+using Microsoft.Phone.Tasks;
 
 namespace standrighthere
 {
@@ -27,6 +28,7 @@ namespace standrighthere
 
         public static UserViewModel UserDetails { get; private set; }
 
+        public static PhotoResult PhotoResult {get; set; }
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>
@@ -75,9 +77,6 @@ namespace standrighthere
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            var testObject = new ParseObject("TestObject");
-            testObject["foo"] = "bar";
-            testObject.SaveAsync();
         }
 
         // Code to execute when the application is activated (brought to foreground)

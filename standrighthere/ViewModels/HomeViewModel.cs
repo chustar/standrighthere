@@ -6,12 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Parse;
+using Windows.Devices.Geolocation;
+using System.Windows;
 
 namespace standrighthere.ViewModels
 {
     public partial class HomeViewModel
     {
-        private IEnumerable<ParseObject> Challenges { get; set; }
+        private ObservableCollection<ChallengeViewModel> Challenges { get; set; }
 
         public bool IsDataLoaded
         {
@@ -20,15 +22,17 @@ namespace standrighthere.ViewModels
 
         public async void LoadData()
         {
-            if (ParseUser.CurrentUser != null)
+            var geoposition = await Utilities.GeoLocationHelper.GetLocation();
+            var geoPoint = new ParseGeoPoint(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
+            var query = ParseObject.GetQuery("Challenges");
+            query.WhereNear("location", geoPoint);
+            query.Limit(20);
+            foreach (ParseObject challenge in await query.FindAsync())
             {
-                var query = ParseObject.GetQuery("Challenges");
-                query.WhereNear("location", ParseUser.CurrentUser.Get<ParseGeoPoint>("location"));
-                query.Limit(20);
-                Challenges = await query.FindAsync();
-
-                IsDataLoaded = true;
+                Challenges.Add(new ChallengeViewModel(challenge));
             }
+
+            IsDataLoaded = true;
         }
     }
 }

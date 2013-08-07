@@ -47,13 +47,13 @@
 
             <phone:PanoramaItem Header="new">
                 <Grid>
-                    <HyperlinkButton Content="New Challenge" NavigateUri="/NewChallenge.xaml" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,12,0,0"/>
+                    <Button Content="New Challenge" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Begin_PhotoChooserTask" />
                 </Grid>
             </phone:PanoramaItem>
             
             <phone:PanoramaItem Header="me">
                 <Grid>
-                    <HyperlinkButton x:Name="Join" Content="Join" NavigateUri="/NewUser.xaml" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,12,0,0" Visibility="Collapsed" />
+                    <HyperlinkButton x:Name="Join" Content="Join" NavigateUri="/NewUser.xaml" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource HyperlinkStyle}" Visibility="Collapsed" />
                     <Controls:UserDetailsControl x:Name="UserDetails" Visibility="Collapsed" />
                 </Grid>
             </phone:PanoramaItem>
