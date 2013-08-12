@@ -56,7 +56,7 @@
             <phone:PanoramaItem Header="me">
                 <Grid>
                     <HyperlinkButton x:Name="Join" Content="Join" NavigateUri="/NewUser.xaml" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource HyperlinkStyle}" Visibility="Collapsed" />
-                    <Controls:UserDetailsControl x:Name="UserDetails" Visibility="Collapsed" />
+                    <Controls:UserDetailsControl x:Name="UserDetails" Visibility="Collapsed" DataContext="{Binding User}" />
                 </Grid>
             </phone:PanoramaItem>
         </phone:Panorama>

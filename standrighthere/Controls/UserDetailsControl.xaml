@@ -7,18 +7,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=LayoutTransformer"
     mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     >
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Rectangle Width="172" Height="172" Fill="Black" Margin="0,0,24,0" />
-                <StackPanel>
-                    <TextBlock Text="{Binding Username}" FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}" Foreground="black" />
-                    <TextBlock Text="{Binding CreatedRelative}" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="black" Margin="0,0,0,0" />
-                </StackPanel>
+            <StackPanel>
+                <TextBlock Text="{Binding Username}" FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}" />
+                <TextBlock Text="{Binding CreatedRelative}" FontSize="{StaticResource PhoneFontSizeLarge}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <toolkit:LayoutTransformer>
