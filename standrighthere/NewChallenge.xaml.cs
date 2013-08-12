@@ -64,9 +64,8 @@ namespace standrighthere
             }
             else
             {
-                var memoryStream = new MemoryStream();
-                App.PhotoResult.ChosenPhoto.CopyTo(memoryStream);
-                var image = new ParseFile(Title.Text + ".png", memoryStream);
+                App.PhotoResult.ChosenPhoto.Seek(0, SeekOrigin.Begin);
+                var image = new ParseFile(System.IO.Path.GetFileName(App.PhotoResult.OriginalFileName), App.PhotoResult.ChosenPhoto);
                 await image.SaveAsync(new Progress());
                 App.PhotoResult.ChosenPhoto.Close();
 

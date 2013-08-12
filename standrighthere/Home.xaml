@@ -14,30 +14,31 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="False" Loaded="Home_Loaded">
-
+    Loaded="Home_Loaded"
+    shell:SystemTray.IsVisible="True">
+    
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
             <phone:Panorama Title="stand right here">
-            <phone:PanoramaItem Header="near me" Orientation="Horizontal" Width="1000">
+            <phone:PanoramaItem Header="near me" Orientation="Horizontal">
                 <StackPanel>
-                    <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Challenges}" >
+                    <ListBox Margin="12,0,0,0" ItemsSource="{Binding Challenges}" >
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <toolkit:WrapPanel Orientation="Horizontal" />
+                                <toolkit:WrapPanel Orientation="Horizontal" Width="408" />
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
-                        <ListBox.Template>
-                            <ControlTemplate>
-                                <ItemsPresenter />
-                            </ControlTemplate>
-                        </ListBox.Template>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Grid>
-                                    <Image Source="{Binding Image}" Width="173" Height="173" Stretch="Fill" Margin="12,0,0,0" />
-                                    <TextBlock Text="{Binding Title}" Style="{StaticResource PhoneTextNormalStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
-                                </Grid>
+                        <Grid Width="173" Height="173" Margin="0,0,32,0">
+                            <Image Source="{Binding Image}" Width="173" Height="173" />
+                            <Grid Height="32" VerticalAlignment="Bottom">
+                                <Grid.Background>
+                                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.5" />
+                                </Grid.Background>
+                                <TextBlock Text="{Binding Title}" FontSize="{StaticResource PhoneFontSizeMedium}" VerticalAlignment="Bottom" HorizontalAlignment="Left" TextTrimming="WordEllipsis" />
+                            </Grid>
+                        </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>

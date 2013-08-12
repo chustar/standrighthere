@@ -1,29 +1,38 @@
 ﻿using Parse;
 using standrighthere.Utilities;
 using System;
+using System.ComponentModel;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace standrighthere.ViewModels
 {
     public partial class ChallengeViewModel
     {
+        private ParseObject _challengeObject;
+        
         public ChallengeViewModel(ParseObject challengeObject)
         {
             _challengeObject = challengeObject;
         }
+        
+        public UserViewModel User
+        {
+            get
+            {
+                return new UserViewModel(_challengeObject.Get<ParseUser>("user"));
+            }
+        }
+        
 
         public string Title
         {
             get
             {
                 return _challengeObject.Get<string>("title");
-            }
-        }
-
-        public string Description
-        {
-            get
-            {
-                return _challengeObject.Get<string>("description");
             }
         }
 
@@ -35,14 +44,6 @@ namespace standrighthere.ViewModels
             }
         }
 
-        public UserViewModel UserDetails
-        {
-            get
-            {
-                return new UserViewModel(_challengeObject.Get<ParseUser>("user"));
-            }
-        }
-        
         public ParseGeoPoint GeoPoint
         {
             get
@@ -55,7 +56,7 @@ namespace standrighthere.ViewModels
         {
             get
             {
-                return _challengeObject.Get<DateTime>("createdAt");
+                return _challengeObject.CreatedAt.Value;
             }
         }
 
@@ -63,10 +64,16 @@ namespace standrighthere.ViewModels
         {
             get
             {
-                return TimeAgo.GetTimeAgo(_challengeObject.Get<DateTime>("createdAt"));
+                return TimeAgo.GetTimeAgo(_challengeObject.CreatedAt.Value);
             }
         }
 
-        private ParseObject _challengeObject;
+        public string LocationRelative
+        {
+            get
+            {
+                return GeoPoint.RelativeDistanceTo(GeoLocationHelper.CachedLocation.ToParseGeoPoint());
+            }
+        }
     }
 }

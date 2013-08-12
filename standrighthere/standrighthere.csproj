@@ -97,6 +97,9 @@
     <Compile Include="ChallengeList.xaml.cs">
       <DependentUpon>ChallengeList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ChallengeControl.xaml.cs">
+      <DependentUpon>ChallengeControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UserDetailsControl.xaml.cs">
       <DependentUpon>UserDetailsControl.xaml</DependentUpon>
     </Compile>
@@ -117,7 +120,7 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="UserDetailsManager.xaml.cs" />
-    <Compile Include="Utilities\Consent.cs" />
+    <Compile Include="Utilities\GeoLocationHelper.cs" />
     <Compile Include="Utilities\TimeAgo.cs" />
     <Compile Include="ViewModels\ChallengeViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
@@ -131,6 +134,10 @@
     <Page Include="ChallengeList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChallengeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\UserDetailsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -210,6 +217,18 @@
     <Reference Include="Parse.Phone">
       <HintPath>..\packages\Parse.1.2.5\lib\wp8\Parse.Phone.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp.WindowsPhone">
+      <HintPath>..\packages\RestSharp.104.1\lib\sl4-wp71\RestSharp.WindowsPhone.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.13\lib\sl4-windowsphone71\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.13\lib\sl4-windowsphone71\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.13\lib\sl4-windowsphone71\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
@@ -225,4 +244,5 @@
   </Target>
   -->
   <ProjectExtensions />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.8\tools\Microsoft.Bcl.Build.targets" />
 </Project>

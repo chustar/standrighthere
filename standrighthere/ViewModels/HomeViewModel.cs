@@ -8,26 +8,31 @@ using System.Threading.Tasks;
 using Parse;
 using Windows.Devices.Geolocation;
 using System.Windows;
+using System.Net.Http;
 
 namespace standrighthere.ViewModels
 {
     public partial class HomeViewModel
     {
-        private ObservableCollection<ChallengeViewModel> Challenges { get; set; }
+        public HomeViewModel()
+        {
+            Challenges = new ObservableCollection<ChallengeViewModel>();
+        }
+
+        public ObservableCollection<ChallengeViewModel> Challenges { get; set; }
 
         public bool IsDataLoaded
         {
             get; private set;
         }
 
-        public async void LoadData()
+        public async Task LoadData()
         {
             var geoposition = await Utilities.GeoLocationHelper.GetLocation();
             var geoPoint = new ParseGeoPoint(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
-            var query = ParseObject.GetQuery("Challenges");
-            query.WhereNear("location", geoPoint);
-            query.Limit(20);
-            foreach (ParseObject challenge in await query.FindAsync())
+            var query = ParseObject.GetQuery("Challenge");
+            query.WhereNear("location", geoPoint).Limit(4);
+            foreach (var challenge in await query.FindAsync())
             {
                 Challenges.Add(new ChallengeViewModel(challenge));
             }

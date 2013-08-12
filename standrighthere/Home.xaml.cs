@@ -24,11 +24,16 @@ namespace standrighthere
         }
 
         // Load data for the ViewModel Items
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             if (!HomeViewModel.IsDataLoaded)
             {
-                HomeViewModel.LoadData();
+                SystemTray.ProgressIndicator = new ProgressIndicator();
+                SystemTray.ProgressIndicator.IsVisible= true;
+                SystemTray.ProgressIndicator.IsIndeterminate = true;
+                SystemTray.ProgressIndicator.Text = "Loading...";
+                await HomeViewModel.LoadData();
+                SystemTray.ProgressIndicator.IsVisible= false;
             }
         }
 
