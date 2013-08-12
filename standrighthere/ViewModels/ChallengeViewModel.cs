@@ -44,11 +44,19 @@ namespace standrighthere.ViewModels
             }
         }
 
-        public ParseGeoPoint GeoPoint
+        public ParseGeoPoint Location
         {
             get
             {
                 return _challengeObject.Get<ParseGeoPoint>("geoPoint");
+            }
+        }
+        
+        public string Distance
+        {
+            get
+            {
+                return Location.RelativeDistanceTo(GeoLocationHelper.CachedLocation.ToParseGeoPoint());
             }
         }
         
@@ -65,14 +73,6 @@ namespace standrighthere.ViewModels
             get
             {
                 return TimeAgo.GetTimeAgo(_challengeObject.CreatedAt.Value);
-            }
-        }
-
-        public string LocationRelative
-        {
-            get
-            {
-                return GeoPoint.RelativeDistanceTo(GeoLocationHelper.CachedLocation.ToParseGeoPoint());
             }
         }
     }

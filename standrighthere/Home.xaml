@@ -30,19 +30,20 @@
                         </ListBox.ItemsPanel>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                        <Grid Width="173" Height="173" Margin="0,0,32,0">
-                            <Image Source="{Binding Image}" Width="173" Height="173" />
-                            <Grid Height="32" VerticalAlignment="Bottom">
-                                <Grid.Background>
-                                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.5" />
-                                </Grid.Background>
-                                <TextBlock Text="{Binding Title}" FontSize="{StaticResource PhoneFontSizeMedium}" VerticalAlignment="Bottom" HorizontalAlignment="Left" TextTrimming="WordEllipsis" />
-                            </Grid>
-                        </Grid>
+                                <Grid Width="173" Height="173" Margin="0,0,32,0">
+                                    <Image Source="{Binding Image}" Width="173" Height="173" />
+                                    <StackPanel Height="60" VerticalAlignment="Bottom">
+                                        <StackPanel.Background>
+                                            <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.5" />
+                                        </StackPanel.Background>
+                                        <TextBlock Text="{Binding Title}" FontSize="{StaticResource PhoneFontSizeMedium}" VerticalAlignment="Bottom" HorizontalAlignment="Left" TextTrimming="WordEllipsis" Margin="12,0,0,0" Foreground="{StaticResource PhoneBackgroundBrush}" />
+                                        <TextBlock Text="{Binding Distance}" FontSize="{StaticResource PhoneFontSizeSmall}"  Margin="12,0,0,0" Foreground="{StaticResource PhoneBackgroundBrush}" />
+                                    </StackPanel>
+                                </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <HyperlinkButton Content="See All" NavigateUri="/ChallengeList.xaml" HorizontalAlignment="Left" Margin="0,12,0,0"/>
+                    <HyperlinkButton Content="See All" NavigateUri="/ChallengeList.xaml" Style="{StaticResource HyperlinkStyle}" />
                 </StackPanel>
             </phone:PanoramaItem>
 

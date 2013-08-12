@@ -91,12 +91,12 @@ namespace standrighthere.Utilities
             return new ParseGeoPoint(position.Coordinate.Latitude, position.Coordinate.Longitude);
         }
         
-        public static string RelativeDistanceTo(this ParseGeoPoint position1, this ParseGeoPoint position2)
+        public static string RelativeDistanceTo(this ParseGeoPoint position1, ParseGeoPoint position2)
         {
             var distance = position1.DistanceTo(position2).Miles;
             if (distance < 0.5)
             {
-                return (distance * 5280) + " feet";
+                return Math.Round((distance * 5280), 0) + " feet";
             }
             else if (distance < 1)
             {
