@@ -14,12 +14,13 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
-
+    Loaded="ChallengeList_Loaded"
+    shell:SystemTray.IsVisible="True"
+    >
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <phone:Pivot Title="STAND RIGHT HERE">
             <phone:PivotItem Header="nearby">
-                <phone:LongListSelector Margin="0,-20,0,0" ItemsSource="{Binding Challenges}">
+                <phone:LongListSelector x:Name="ChallengeList" ItemsSource="{Binding Challenges}" Margin="0,-20,0,0" ItemRealized="LongListSelector_ItemRealized">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="30,0,0,0" Height="120">

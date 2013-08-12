@@ -11,6 +11,7 @@ using Microsoft.Phone.Shell;
 using standrighthere.ViewModels;
 using System.Collections.ObjectModel;
 using Parse;
+using System.Windows.Data;
 
 namespace standrighthere
 {
@@ -20,25 +21,38 @@ namespace standrighthere
         {
             InitializeComponent();
 
-            LoadData();
+            DataContext = _viewModel;
         }
-        
-        public ObservableCollection<ChallengeViewModel> Challenges { get; private set; }
 
-        public bool IsDataLoaded { get; private set; }
-
-        public async void LoadData()
+        private ChallengeListViewModel _viewModel = new ChallengeListViewModel();
+        private async void LongListSelector_ItemRealized(object sender, ItemRealizationEventArgs e)
         {
-            var query = ParseObject.GetQuery("Challenges");
-            query.WhereNear("location", ParseUser.CurrentUser.Get<ParseGeoPoint>("location"));
-            query.Limit(20);
-            var challenges = await query.FindAsync();
-            foreach (var challenge in challenges)
+            if (!_viewModel.IsLoading && ChallengeList.ItemsSource != null && ChallengeList.ItemsSource.Count >= _viewModel.CurrentlyLoaded)
             {
-                Challenges.Add(new ChallengeViewModel(challenge));
+                if (e.ItemKind == LongListSelectorItemKind.Item)
+                {
+                    if ((e.Container.Content as ChallengeViewModel).Equals(ChallengeList.ItemsSource[ChallengeList.ItemsSource.Count - _viewModel.CurrentlyLoaded]))
+                    {
+                        await _viewModel.LoadData(_viewModel.CurrentlyLoaded);
+                    }
+                }
             }
+        }
 
-            IsDataLoaded = true;
+        private void ChallengeList_Loaded(object sender, RoutedEventArgs e)
+        {
+            var progressIndicator = SystemTray.ProgressIndicator;
+            if (progressIndicator != null)
+            {
+                return;
+            }
+            progressIndicator = new ProgressIndicator();
+            BindingOperations.SetBinding(progressIndicator, ProgressIndicator.IsVisibleProperty, new Binding("IsLoading"){ Source = _viewModel });
+            BindingOperations.SetBinding(progressIndicator, ProgressIndicator.IsIndeterminateProperty, new Binding("IsLoading"){ Source = _viewModel });
+            progressIndicator.Text = "Loading new challenges...";
+            SystemTray.SetProgressIndicator(this, progressIndicator);
+
+
         }
     }
 }
