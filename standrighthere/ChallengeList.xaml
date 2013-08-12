@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=LayoutTransformer"
     mc:Ignorable="d"
     xmlns:ViewModels="clr-namespace:standrighthere.ViewModels"
     xmlns:UserControls="clr-namespace:standrighthere.Controls"
@@ -21,15 +22,24 @@
                 <phone:LongListSelector Margin="0,-20,0,0" ItemsSource="{Binding Challenges}">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="12,2,0,4" Height="105" Width="432">
-                                <!--Replace rectangle with image-->
-                                <Image Source="{Binding Image}" Height="99" Width="99" />
-                                <StackPanel Width="311" Margin="8,-7,0,0">
+                            <StackPanel Orientation="Horizontal" Margin="30,0,0,0" Height="120">
+                                <Image Source="{Binding Image}" Height="120" Width="120" />
+                                <StackPanel Width="324" Margin="8,0,0,0">
                                     <TextBlock Text="{Binding Title}" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextTrimming="WordEllipsis" />
-                                    <TextBlock Text="{Binding Description}" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" TextTrimming="WordEllipsis" />
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding CreatedRelative}" TextWrapping="Wrap" Width="100" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
-                                        <TextBlock Text="chustar" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                        <StackPanel Orientation="Horizontal">
+                                            <toolkit:LayoutTransformer>
+                                                <toolkit:LayoutTransformer.LayoutTransform>
+                                                    <RotateTransform Angle="270"/>
+                                                </toolkit:LayoutTransformer.LayoutTransform>
+                                                <TextBlock Text="solved" FontSize="{StaticResource PhoneFontSizeMedium}" HorizontalAlignment="Center" />
+                                            </toolkit:LayoutTransformer>
+                                            <TextBlock Text="{Binding SolvedCount}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" Margin="12,0,0,0" Width="120" />
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Username}" Margin="10,0,0,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                            <TextBlock Text="{Binding CreatedRelative}" Style="{StaticResource PhoneTextSubtleStyle}" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                        </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>
@@ -39,5 +49,5 @@
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>
-    
+
 </phone:PhoneApplicationPage>

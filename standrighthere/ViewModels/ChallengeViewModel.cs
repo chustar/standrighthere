@@ -12,21 +12,31 @@ namespace standrighthere.ViewModels
 {
     public partial class ChallengeViewModel
     {
-        private ParseObject _challengeObject;
-        
         public ChallengeViewModel(ParseObject challengeObject)
         {
             _challengeObject = challengeObject;
         }
-        
+
+        private UserViewModel _user;
         public UserViewModel User
         {
             get
             {
-                return new UserViewModel(_challengeObject.Get<ParseUser>("user"));
+                if (_user == null)
+                {
+                    _user = new UserViewModel(_challengeObject.Get<ParseUser>("user"));
+                }
+                return _user;
             }
         }
-        
+
+        public string Username
+        {
+            get
+            {
+                return User.Username;
+            }
+        }
 
         public string Title
         {
@@ -59,6 +69,8 @@ namespace standrighthere.ViewModels
                 return Location.RelativeDistanceTo(GeoLocationHelper.CachedLocation.ToParseGeoPoint());
             }
         }
+
+        public int SolvedCount { get; set; }
         
         public DateTime Created
         {
@@ -75,5 +87,26 @@ namespace standrighthere.ViewModels
                 return TimeAgo.GetTimeAgo(_challengeObject.CreatedAt.Value);
             }
         }
+        
+        private ParseObject _challengeObject;
+        
+        async Task FetchData()
+        {
+            SolvedCount = await (from challenge in ParseObject.GetQuery("Challenges")
+                                 where challenge.Get<ParseUser>("user") == _challengeObject.Get<ParseUser>("user")
+                                 select challenge).CountAsync();
+            NotifyPropertyChanged("SolvedCount");
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (null != handler)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
     }
 }
