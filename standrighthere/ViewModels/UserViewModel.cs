@@ -13,7 +13,7 @@ namespace standrighthere.ViewModels
         public UserViewModel(ParseUser user)
         {
             _user = user;
-            FetchData();
+            LoadData();
         }
 
         public string Username
@@ -36,7 +36,7 @@ namespace standrighthere.ViewModels
             }
         }
 
-        async Task FetchData()
+        async Task LoadData()
         {
             SolvedCount = await (from challenge in ParseObject.GetQuery("Challenges")
                                  where challenge.Get<ParseUser>("user") == _user

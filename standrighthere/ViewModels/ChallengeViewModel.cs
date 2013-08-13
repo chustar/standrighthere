@@ -1,6 +1,7 @@
 ﻿using Parse;
 using standrighthere.Utilities;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
@@ -10,11 +11,14 @@ using System.Windows.Media.Imaging;
 
 namespace standrighthere.ViewModels
 {
-    public partial class ChallengeViewModel
+    public partial class ChallengeViewModel : INotifyPropertyChanged
     {
         public ChallengeViewModel(ParseObject challengeObject)
         {
             _challengeObject = challengeObject;
+            Comments = new ObservableCollection<CommentViewModel>();
+
+            LoadData();
         }
 
         private UserViewModel _user;
@@ -72,6 +76,8 @@ namespace standrighthere.ViewModels
 
         public int SolvedCount { get; set; }
         
+        public ObservableCollection<CommentViewModel> Comments { get; set; }
+        
         public DateTime Created
         {
             get
@@ -84,20 +90,40 @@ namespace standrighthere.ViewModels
         {
             get
             {
-                return TimeAgo.GetTimeAgo(_challengeObject.CreatedAt.Value);
+                return TimeAgo.GetTimeAgo(Created);
             }
         }
         
         private ParseObject _challengeObject;
         
-        async Task FetchData()
+        public bool IsLoadingComments { get; set; }
+
+        public int CurrentlyLoadedComments { get; set; }
+
+        
+        public async Task LoadData()
         {
             SolvedCount = await (from challenge in ParseObject.GetQuery("Challenges")
                                  where challenge.Get<ParseUser>("user") == _challengeObject.Get<ParseUser>("user")
                                  select challenge).CountAsync();
             NotifyPropertyChanged("SolvedCount");
+
+            LoadComments();
         }
 
+        public async Task LoadComments(int skipCount = 0)
+        {
+            IsLoadingComments = true;
+            var query = ParseObject.GetQuery("Comment");
+            query.Limit(20).Skip(skipCount);
+            foreach (var comment in await query.FindAsync())
+            {
+                Comments.Add(new CommentViewModel(comment));
+            }
+            CurrentlyLoadedComments = skipCount + 20;
+            IsLoadingComments = false;
+        }
+        
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(string propertyName)
         {
@@ -107,6 +133,5 @@ namespace standrighthere.ViewModels
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
     }
 }

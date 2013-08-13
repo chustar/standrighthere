@@ -60,7 +60,7 @@ namespace standrighthere
             }
             else if (Title.Text.Trim() == "")
             {
-                MessageBox.Show("You need to name the challenge.");
+                MessageBox.Show("You need to name the comment.");
             }
             else
             {
@@ -71,7 +71,7 @@ namespace standrighthere
 
                 var challenge = new ParseObject("Challenge")
                 {
-                    {"user", App.UserDetails},
+                    {"user", ParseUser.CurrentUser},
                     {"title", Title.Text},
                     {"image", image},
                     {"geoPoint", geoPoint}
@@ -84,7 +84,7 @@ namespace standrighthere
                 }
                 else
                 {
-                    MessageBox.Show("We couldn't save the challenge. Please try again.");
+                    MessageBox.Show("We couldn't save the comment. Please try again.");
                 }
             }
         }

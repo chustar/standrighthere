@@ -28,7 +28,9 @@ namespace standrighthere
 
         public static UserViewModel UserDetails { get; private set; }
 
-        public static PhotoResult PhotoResult {get; set; }
+        public static PhotoResult PhotoResult { get; set; }
+
+        public static ChallengeViewModel CurrentChallenge { get; set; }
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>

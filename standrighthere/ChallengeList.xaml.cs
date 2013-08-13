@@ -27,11 +27,11 @@ namespace standrighthere
         private ChallengeListViewModel _viewModel = new ChallengeListViewModel();
         private async void LongListSelector_ItemRealized(object sender, ItemRealizationEventArgs e)
         {
-            if (!_viewModel.IsLoading && ChallengeList.ItemsSource != null && ChallengeList.ItemsSource.Count >= _viewModel.CurrentlyLoaded)
+            if (!_viewModel.IsLoading && Challenges.ItemsSource != null && Challenges.ItemsSource.Count >= _viewModel.CurrentlyLoaded)
             {
                 if (e.ItemKind == LongListSelectorItemKind.Item)
                 {
-                    if ((e.Container.Content as ChallengeViewModel).Equals(ChallengeList.ItemsSource[ChallengeList.ItemsSource.Count - _viewModel.CurrentlyLoaded]))
+                    if ((e.Container.Content as ChallengeViewModel).Equals(Challenges.ItemsSource[Challenges.ItemsSource.Count - _viewModel.CurrentlyLoaded]))
                     {
                         await _viewModel.LoadData(_viewModel.CurrentlyLoaded);
                     }
@@ -39,7 +39,7 @@ namespace standrighthere
             }
         }
 
-        private void ChallengeList_Loaded(object sender, RoutedEventArgs e)
+        private void Challenges_Loaded(object sender, RoutedEventArgs e)
         {
             var progressIndicator = SystemTray.ProgressIndicator;
             if (progressIndicator != null)
@@ -51,8 +51,6 @@ namespace standrighthere
             BindingOperations.SetBinding(progressIndicator, ProgressIndicator.IsIndeterminateProperty, new Binding("IsLoading"){ Source = _viewModel });
             progressIndicator.Text = "Loading new challenges...";
             SystemTray.SetProgressIndicator(this, progressIndicator);
-
-
         }
     }
 }

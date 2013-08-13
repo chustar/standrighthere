@@ -94,11 +94,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Challenge.xaml.cs">
+      <DependentUpon>Challenge.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ChallengeList.xaml.cs">
       <DependentUpon>ChallengeList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ChallengeControl.xaml.cs">
-      <DependentUpon>ChallengeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\UserDetailsControl.xaml.cs">
       <DependentUpon>UserDetailsControl.xaml</DependentUpon>
@@ -123,6 +123,8 @@
     <Compile Include="Utilities\GeoLocationHelper.cs" />
     <Compile Include="Utilities\TimeAgo.cs" />
     <Compile Include="ViewModels\ChallengeViewModel.cs" />
+    <Compile Include="ViewModels\ChallengeListViewModel.cs" />
+    <Compile Include="ViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
@@ -131,13 +133,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="ChallengeList.xaml">
+    <Page Include="Challenge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChallengeControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="ChallengeList.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\UserDetailsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
