@@ -52,5 +52,15 @@ namespace standrighthere
             progressIndicator.Text = "Loading new challenges...";
             SystemTray.SetProgressIndicator(this, progressIndicator);
         }
+
+        private void Challenges_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((sender as LongListSelector).SelectedItem != null)
+            {
+                App.CurrentChallenge = (sender as LongListSelector).SelectedItem as ChallengeViewModel;
+                NavigationService.Navigate(new System.Uri(string.Format("/Challenge.xaml"), System.UriKind.Relative));
+                (sender as LongListSelector).SelectedItem = null;
+            }
+        }
     }
 }

@@ -49,7 +49,7 @@
 
             <phone:PivotItem Header="comments">
                 <StackPanel>
-                    <toolkit:PhoneTextBox x:Name="NewCommentText" Hint="What do you think of this challenge?" AcceptsReturn="False" ActionIcon="/Toolkit.Content/send.png" ActionIconTapped="NewCommentText_ActionIconTapped" />
+                    <toolkit:PhoneTextBox x:Name="NewCommentText" Hint="Add a comment" AcceptsReturn="False" ActionIcon="/Toolkit.Content/send.png" ActionIconTapped="NewCommentText_ActionIconTapped" />
                     <phone:LongListSelector x:Name="Challenges" ItemsSource="{Binding Comments}" Margin="0,12,0,0" ItemRealized="Challenges_ItemRealized">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>

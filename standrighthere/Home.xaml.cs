@@ -20,6 +20,10 @@ namespace standrighthere
         {
             InitializeComponent();
 
+            if (ParseUser.CurrentUser != null)
+            {
+                HomeViewModel.User = new UserViewModel(ParseUser.CurrentUser);
+            }
             DataContext = HomeViewModel;
         }
 
@@ -50,7 +54,7 @@ namespace standrighthere
             }
         }
 
-        public UserViewModel UserViewModel { get; private set; }
+        public UserViewModel User { get; private set; }
 
         private void Home_Loaded(object sender, RoutedEventArgs e)
         {

@@ -20,33 +20,35 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <phone:Pivot Title="STAND RIGHT HERE">
             <phone:PivotItem Header="nearby">
-                <phone:LongListSelector x:Name="Challenges" ItemsSource="{Binding Challenges}" Margin="0,-20,0,0" ItemRealized="LongListSelector_ItemRealized">
-                    <phone:LongListSelector.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="30,0,0,0" Height="120">
-                                <Image Source="{Binding Image}" Height="120" Width="120" />
-                                <StackPanel Width="324" Margin="8,0,0,0">
-                                    <TextBlock Text="{Binding Title}" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextTrimming="WordEllipsis" />
-                                    <StackPanel Orientation="Horizontal">
-                                        <StackPanel Orientation="Horizontal">
-                                            <toolkit:LayoutTransformer>
-                                                <toolkit:LayoutTransformer.LayoutTransform>
-                                                    <RotateTransform Angle="270"/>
-                                                </toolkit:LayoutTransformer.LayoutTransform>
-                                                <TextBlock Text="solved" FontSize="{StaticResource PhoneFontSizeMedium}" HorizontalAlignment="Center" />
-                                            </toolkit:LayoutTransformer>
-                                            <TextBlock Text="{Binding SolvedCount}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" Margin="12,0,0,0" Width="120" />
-                                        </StackPanel>
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding Username}" Margin="10,0,0,0" Style="{StaticResource PhoneTextSubtleStyle}" />
-                                            <TextBlock Text="{Binding CreatedRelative}" Style="{StaticResource PhoneTextSubtleStyle}" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                <Grid>
+                    <phone:LongListSelector x:Name="Challenges" ItemsSource="{Binding Challenges}" Margin="0,-20,0,0" ItemRealized="LongListSelector_ItemRealized" SelectionChanged="Challenges_SelectionChanged">
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="30,0,0,16" Height="120">
+                                    <Image Source="{Binding Image}" Height="120" Width="120" />
+                                    <StackPanel Width="324" Margin="12,0,0,0">
+                                        <TextBlock Text="afdald lkafjdl dlfa" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextTrimming="WordEllipsis" />
+                                        <StackPanel Orientation="Horizontal" Margin="12">
+                                            <StackPanel Orientation="Horizontal">
+                                                <toolkit:LayoutTransformer>
+                                                    <toolkit:LayoutTransformer.LayoutTransform>
+                                                        <RotateTransform Angle="270"/>
+                                                    </toolkit:LayoutTransformer.LayoutTransform>
+                                                    <TextBlock Text="solved" FontSize="{StaticResource PhoneFontSizeSmall}" HorizontalAlignment="Center" />
+                                                </toolkit:LayoutTransformer>
+                                                <TextBlock Text="{Binding SolvedCount}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" Margin="12,0,0,0" Width="120" />
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Username}" Margin="10,0,0,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                                <TextBlock Text="{Binding CreatedRelative}" Style="{StaticResource PhoneTextSubtleStyle}" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                            </StackPanel>
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
-                        </DataTemplate>
-                    </phone:LongListSelector.ItemTemplate>
-                </phone:LongListSelector>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                    </phone:LongListSelector>
+            </Grid>
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>

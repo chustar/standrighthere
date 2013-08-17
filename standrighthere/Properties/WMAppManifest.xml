@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{e289d576-0386-40e9-8cdb-909d0fc3e238}" Title="standrighthere" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="standrighthere author" Description="Sample description" Publisher="standrighthere" PublisherID="{314d6618-30bb-439f-8b43-b410aa60d3b9}">
+  <App xmlns="" ProductID="{e289d576-0386-40e9-8cdb-909d0fc3e238}" Title="stand right here" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="standrighthere author" Description="Get a new perspective on your city!&#xD;&#xA;Find the exact spot where the picture was taken and try to replicate it." Publisher="standrighthere" PublisherID="{314d6618-30bb-439f-8b43-b410aa60d3b9}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />

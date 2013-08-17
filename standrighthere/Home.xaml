@@ -7,8 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    xmlns:ViewModels="clr-namespace:standrighthere.ViewModels"
-    xmlns:Controls="clr-namespace:standrighthere.Controls"
+    xmlns:transformer="clr-namespace:System.Windows.Controls;assembly=LayoutTransformer"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -25,7 +24,7 @@
                     <ListBox Margin="12,0,0,0" ItemsSource="{Binding Challenges}" >
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <toolkit:WrapPanel Orientation="Horizontal" Width="408" />
+                                <toolkit:WrapPanel Orientation="Horizontal" Width="412" />
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                         <ListBox.ItemTemplate>
@@ -53,10 +52,39 @@
                 </Grid>
             </phone:PanoramaItem>
             
-            <phone:PanoramaItem Header="me">
+            <phone:PanoramaItem Header="dcz">
                 <Grid>
                     <HyperlinkButton x:Name="Join" Content="Join" NavigateUri="/NewUser.xaml" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource HyperlinkStyle}" Visibility="Collapsed" />
-                    <Controls:UserDetailsControl x:Name="UserDetails" Visibility="Collapsed" DataContext="{Binding User}" />
+                    <Grid x:Name="UserDetails">
+                        <StackPanel Margin="12,0,0,0">
+                            <TextBlock Text="{Binding UserCreatedRelative}" FontSize="{StaticResource PhoneFontSizeLarge}" Margin="0,-24,0,0" />
+                            <StackPanel Orientation="Horizontal" Margin="0,24,0,0">
+                                <transformer:LayoutTransformer>
+                                    <transformer:LayoutTransformer.LayoutTransform>
+                                        <RotateTransform Angle="270"/>
+                                    </transformer:LayoutTransformer.LayoutTransform>
+                                    <Grid Background="Red" VerticalAlignment="Center">
+                                        <TextBlock Text="submitted" FontSize="{StaticResource PhoneFontSizeLarge}" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="12" />
+                                    </Grid>
+                                </transformer:LayoutTransformer>
+                                <TextBlock Text="{Binding UserSubmittedCount}" FontSize="132" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="24,0,0,0" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,24,0,0">
+                                <transformer:LayoutTransformer>
+                                    <transformer:LayoutTransformer.LayoutTransform>
+                                        <RotateTransform Angle="270"/>
+                                    </transformer:LayoutTransformer.LayoutTransform>
+                                    <Grid Background="Red">
+                                        <TextBlock Text="solved" FontSize="{StaticResource PhoneFontSizeLarge}" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="12 "/>
+                                    </Grid>
+                                </transformer:LayoutTransformer>
+                                <Grid>
+                                    <TextBlock Text="{Binding UserSolvedCount}" FontSize="132" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="24,0,0,0" />
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
                 </Grid>
             </phone:PanoramaItem>
         </phone:Panorama>
