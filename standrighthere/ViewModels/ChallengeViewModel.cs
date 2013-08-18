@@ -21,26 +21,7 @@ namespace standrighthere.ViewModels
             LoadData();
         }
 
-        private UserViewModel _user;
-        public UserViewModel User
-        {
-            get
-            {
-                if (_user == null)
-                {
-                    _user = new UserViewModel(_challengeObject.Get<ParseUser>("user"));
-                }
-                return _user;
-            }
-        }
-
-        public string Username
-        {
-            get
-            {
-                return User.Username;
-            }
-        }
+        public UserViewModel User { get; set; }
 
         public string Title
         {
@@ -103,6 +84,10 @@ namespace standrighthere.ViewModels
         
         public async Task LoadData()
         {
+            User = new UserViewModel(await _challengeObject.Get<ParseUser>("user").FetchAsync() as ParseUser);
+            NotifyPropertyChanged("User");
+            NotifyPropertyChanged("Username");
+
             SolvedCount = await (from challenge in ParseObject.GetQuery("Challenges")
                                  where challenge.Get<ParseUser>("user") == _challengeObject.Get<ParseUser>("user")
                                  select challenge).CountAsync();

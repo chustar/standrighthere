@@ -14,9 +14,12 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    Loaded="Challenges_Loaded"
     shell:SystemTray.IsVisible="True"
     >
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator IsIndeterminate="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Text="Loading new challenges" />
+    </shell:SystemTray.ProgressIndicator>
+    
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <phone:Pivot Title="STAND RIGHT HERE">
             <phone:PivotItem Header="nearby">
@@ -39,7 +42,7 @@
                                                 <TextBlock Text="{Binding SolvedCount}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" Margin="12,0,0,0" Width="120" />
                                             </StackPanel>
                                             <StackPanel>
-                                                <TextBlock Text="{Binding Username}" Margin="10,0,0,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                                <TextBlock DataContext="{Binding User}" Text="{Binding Username}" Margin="10,0,0,0" Style="{StaticResource PhoneTextSubtleStyle}" />
                                                 <TextBlock Text="{Binding CreatedRelative}" Style="{StaticResource PhoneTextSubtleStyle}" Margin="10,0,0,0" VerticalAlignment="Bottom" />
                                             </StackPanel>
                                         </StackPanel>

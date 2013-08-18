@@ -33,7 +33,7 @@
                             <TextBlock Text="{Binding SolvedCount}" FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}" Margin="12,-8,0,0" Width="160" />
                         </StackPanel>
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="{Binding Username}" FontSize="{StaticResource PhoneFontSizeMedium}" Margin="12,0,0,0" />
+                            <TextBlock DataContext="{Binding User}" Text="{Binding Username}" FontSize="{StaticResource PhoneFontSizeMedium}" Margin="12,0,0,0" />
                             <TextBlock Text="{Binding CreatedRelative}" FontSize="{StaticResource PhoneFontSizeMedium}" Margin="12,0,0,0" />
                         </StackPanel>
                     </StackPanel>

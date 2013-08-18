@@ -20,12 +20,26 @@ namespace standrighthere.ViewModels
             LoadData();
         }
 
-        public int CurrentlyLoaded { get; set; }
-
+        /// <summary>
+        /// An observable collection of challenges.
+        /// </summary>
         public ObservableCollection<ChallengeViewModel> Challenges { get; set; }
 
+        /// <summary>
+        /// The number of challenges that have been loaded.
+        /// </summary>
+        public int CurrentlyLoaded { get; set; }
+
+        /// <summary>
+        /// True when the VM is actively loading challenges.
+        /// </summary>
         public bool IsLoading { get; set; }
 
+        /// <summary>
+        /// Begins loading new challenges asynchronously.
+        /// </summary>
+        /// <param name="skipCount">The number of challenges to skip.</param>
+        /// <returns>An awaitable task.</returns>
         public async Task LoadData(int skipCount = 0)
         {
             IsLoading = true;

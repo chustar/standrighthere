@@ -39,20 +39,6 @@ namespace standrighthere
             }
         }
 
-        private void Challenges_Loaded(object sender, RoutedEventArgs e)
-        {
-            var progressIndicator = SystemTray.ProgressIndicator;
-            if (progressIndicator != null)
-            {
-                return;
-            }
-            progressIndicator = new ProgressIndicator();
-            BindingOperations.SetBinding(progressIndicator, ProgressIndicator.IsVisibleProperty, new Binding("IsLoading"){ Source = _viewModel });
-            BindingOperations.SetBinding(progressIndicator, ProgressIndicator.IsIndeterminateProperty, new Binding("IsLoading"){ Source = _viewModel });
-            progressIndicator.Text = "Loading new challenges...";
-            SystemTray.SetProgressIndicator(this, progressIndicator);
-        }
-
         private void Challenges_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if ((sender as LongListSelector).SelectedItem != null)
