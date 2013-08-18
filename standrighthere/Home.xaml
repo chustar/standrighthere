@@ -76,7 +76,7 @@
                                         <RotateTransform Angle="270"/>
                                     </transformer:LayoutTransformer.LayoutTransform>
                                     <Grid Background="Red">
-                                        <TextBlock Text="solved" FontSize="{StaticResource PhoneFontSizeLarge}" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="12" Margin="0,-10,0,0" Width="{Binding ElementName=}" />
+                                        <TextBlock Text="solved" FontSize="{StaticResource PhoneFontSizeLarge}" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="12" Margin="0,-10,0,0" />
                                     </Grid>
                                 </transformer:LayoutTransformer>
                                 <Grid>

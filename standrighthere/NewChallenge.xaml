@@ -34,7 +34,7 @@
 
         <StackPanel Grid.Row="2" x:Name="ContentPanel" Margin="0,60,0,0">
             <TextBlock Text="TITLE" Style="{StaticResource TextboxTitleStyle}" TextAlignment="Center" FontSize="{StaticResource PhoneFontSizeLarge}" Width="420" Margin="0,12,0,0" />
-            <toolkit:PhoneTextBox x:Name="Title" Style="{StaticResource FormTextBox}" Width="460" FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
+            <toolkit:PhoneTextBox x:Name="ChallengeTitle" Style="{StaticResource FormTextBox}" Width="460" FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
         </StackPanel>
     </Grid>
 

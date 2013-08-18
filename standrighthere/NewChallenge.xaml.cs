@@ -1,24 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using Microsoft.Phone.Controls;
+using Microsoft.Phone.Maps.Controls;
+using Parse;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
-using System.IO.IsolatedStorage;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using Microsoft.Phone.Tasks;
-using Windows.Devices.Geolocation;
-
-using Microsoft.Phone.Maps.Controls;
-
-using standrighthere.ViewModels;
-using System.IO;
-using Windows.Storage.Streams;
-using Parse;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using Windows.Devices.Geolocation;
 
 namespace standrighthere
 {
@@ -34,10 +24,14 @@ namespace standrighthere
                 Image.Source = bmp;
             }
 
-            OneShotLocation();
+            var task = LoadLocation();
         }
 
-        private async void OneShotLocation()
+        /// <summary>
+        /// Sets the maps center to the current location.
+        /// </summary>
+        /// <returns>An awaitable task.</returns>
+        private async Task LoadLocation()
         {
             geoPosition = await Utilities.GeoLocationHelper.GetLocation();
             Map.Center = geoPosition.Coordinate.ToGeoCoordinate();
@@ -58,7 +52,7 @@ namespace standrighthere
             {
                 MessageBox.Show("Still finding your location. Please try again...");
             }
-            else if (Title.Text.Trim() == "")
+            else if (ChallengeTitle.Text.Trim() == "")
             {
                 MessageBox.Show("You need to name the comment.");
             }
@@ -72,7 +66,7 @@ namespace standrighthere
                 var challenge = new ParseObject("Challenge")
                 {
                     {"user", ParseUser.CurrentUser},
-                    {"title", Title.Text},
+                    {"title", ChallengeTitle.Text},
                     {"image", image},
                     {"geoPoint", geoPoint}
                 };

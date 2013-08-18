@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using Microsoft.Phone.Controls;
+using Parse;
+using standrighthere.ViewModels;
+using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 using System.Windows.Data;
-using standrighthere.ViewModels;
-using Parse;
+using Windows.Devices.Geolocation;
 
 namespace standrighthere
 {
@@ -20,6 +17,17 @@ namespace standrighthere
             InitializeComponent();
 
             DataContext = App.CurrentChallenge;
+
+            var task = LoadLocation();
+        }
+
+        /// <summary>
+        /// Sets the maps center to the current location.
+        /// </summary>
+        /// <returns>An awaitable task.</returns>
+        private async Task LoadLocation()
+        {
+            Map.Center = (await Utilities.GeoLocationHelper.GetLocation()).Coordinate.ToGeoCoordinate();
         }
 
         private void Pivot_LoadingPivotItem(object sender, PivotItemEventArgs e)
