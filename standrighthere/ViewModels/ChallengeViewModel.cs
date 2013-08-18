@@ -18,7 +18,7 @@ namespace standrighthere.ViewModels
             _challengeObject = challengeObject;
             Comments = new ObservableCollection<CommentViewModel>();
 
-            LoadData();
+            var task = LoadData();
         }
 
         public UserViewModel User { get; set; }
@@ -75,13 +75,14 @@ namespace standrighthere.ViewModels
             }
         }
         
-        private ParseObject _challengeObject;
-        
         public bool IsLoadingComments { get; set; }
 
         public int CurrentlyLoadedComments { get; set; }
 
-        
+        /// <summary>
+        /// Load the ChallengeViewModels' data.
+        /// </summary>
+        /// <returns>An awaitable task.</returns>
         public async Task LoadData()
         {
             User = new UserViewModel(await _challengeObject.Get<ParseUser>("user").FetchAsync() as ParseUser);
@@ -93,9 +94,14 @@ namespace standrighthere.ViewModels
                                  select challenge).CountAsync();
             NotifyPropertyChanged("SolvedCount");
 
-            LoadComments();
+            var task = LoadComments();
         }
 
+        /// <summary>
+        /// Loads the challenges comments asynchronously.
+        /// </summary>
+        /// <param name="skipCount">How many comments to skip. Defaults to 0.</param>
+        /// <returns>And awaitable task.</returns>
         public async Task LoadComments(int skipCount = 0)
         {
             IsLoadingComments = true;
@@ -109,7 +115,10 @@ namespace standrighthere.ViewModels
             IsLoadingComments = false;
         }
         
+        private ParseObject _challengeObject;
+
         public event PropertyChangedEventHandler PropertyChanged;
+
         private void NotifyPropertyChanged(string propertyName)
         {
             PropertyChangedEventHandler handler = PropertyChanged;

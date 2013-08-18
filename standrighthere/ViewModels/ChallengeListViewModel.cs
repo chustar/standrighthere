@@ -17,7 +17,7 @@ namespace standrighthere.ViewModels
         public ChallengeListViewModel()
         {
             Challenges = new ObservableCollection<ChallengeViewModel>();
-            LoadData();
+            var task = LoadData();
         }
 
         /// <summary>

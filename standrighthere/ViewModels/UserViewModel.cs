@@ -13,7 +13,7 @@ namespace standrighthere.ViewModels
         public UserViewModel(ParseUser user)
         {
             _user = user;
-            LoadData();
+            var task = LoadData();
         }
 
         public string Username
