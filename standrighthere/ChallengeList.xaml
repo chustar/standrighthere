@@ -28,16 +28,23 @@
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" Margin="30,0,0,16" Height="120">
-                                    <Image Source="{Binding Image}" Height="120" Width="120" />
+                                    <Grid>
+                                        <Image Source="{Binding Image}" Height="120" Width="120" />
+                                        <StackPanel Background="Red" VerticalAlignment="Bottom">
+                                            <TextBlock Text="{Binding Distance}" Padding="2" FontSize="{StaticResource PhoneFontSizeLarge}" />
+                                        </StackPanel>
+                                    </Grid>
                                     <StackPanel Width="324" Margin="12,0,0,0">
-                                        <TextBlock Text="afdald lkafjdl dlfa" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextTrimming="WordEllipsis" />
+                                        <TextBlock Text="{Binding Title}" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextTrimming="WordEllipsis" />
                                         <StackPanel Orientation="Horizontal" Margin="12">
                                             <StackPanel Orientation="Horizontal">
                                                 <toolkit:LayoutTransformer>
                                                     <toolkit:LayoutTransformer.LayoutTransform>
                                                         <RotateTransform Angle="270"/>
                                                     </toolkit:LayoutTransformer.LayoutTransform>
-                                                    <TextBlock Text="solved" FontSize="{StaticResource PhoneFontSizeSmall}" HorizontalAlignment="Center" />
+                                                    <Grid Background="Red">
+                                                        <TextBlock Text="solved" FontSize="{StaticResource PhoneFontSizeSmall}" HorizontalAlignment="Center" Padding="4" Margin="0,-3,0,0" />
+                                                    </Grid>
                                                 </toolkit:LayoutTransformer>
                                                 <TextBlock Text="{Binding SolvedCount}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" Margin="12,0,0,0" Width="120" />
                                             </StackPanel>
@@ -51,7 +58,7 @@
                             </DataTemplate>
                         </phone:LongListSelector.ItemTemplate>
                     </phone:LongListSelector>
-            </Grid>
+                </Grid>
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>
