@@ -52,22 +52,22 @@
                 </Grid>
             </phone:PanoramaItem>
             
-            <phone:PanoramaItem Header="dcz">
+            <phone:PanoramaItem DataContext="{Binding User}" Header="{Binding Username}">
                 <Grid>
                     <HyperlinkButton x:Name="Join" Content="Join" NavigateUri="/NewUser.xaml" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource HyperlinkStyle}" Visibility="Collapsed" />
                     <Grid x:Name="UserDetails">
                         <StackPanel Margin="12,0,0,0">
-                            <TextBlock Text="{Binding UserCreatedRelative}" FontSize="{StaticResource PhoneFontSizeLarge}" Margin="0,-24,0,0" />
+                            <TextBlock Text="{Binding CreatedRelative}" FontSize="{StaticResource PhoneFontSizeLarge}" Margin="0,-24,0,0" />
                             <StackPanel Orientation="Horizontal" Margin="0,24,0,0">
                                 <transformer:LayoutTransformer>
                                     <transformer:LayoutTransformer.LayoutTransform>
                                         <RotateTransform Angle="270"/>
                                     </transformer:LayoutTransformer.LayoutTransform>
                                     <Grid Background="Red" VerticalAlignment="Center">
-                                        <TextBlock Text="submitted" FontSize="{StaticResource PhoneFontSizeLarge}" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="12" />
+                                        <TextBlock Text="submitted" FontSize="{StaticResource PhoneFontSizeLarge}" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="12" Margin="0,-10,0,0" />
                                     </Grid>
                                 </transformer:LayoutTransformer>
-                                <TextBlock Text="{Binding UserSubmittedCount}" FontSize="132" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="24,0,0,0" />
+                                <TextBlock Text="{Binding SubmittedCount}" FontSize="132" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="24,0,-10,0" />
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Margin="0,24,0,0">
@@ -76,11 +76,11 @@
                                         <RotateTransform Angle="270"/>
                                     </transformer:LayoutTransformer.LayoutTransform>
                                     <Grid Background="Red">
-                                        <TextBlock Text="solved" FontSize="{StaticResource PhoneFontSizeLarge}" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="12 "/>
+                                        <TextBlock Text="solved" FontSize="{StaticResource PhoneFontSizeLarge}" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="12" Margin="0,-10,0,0" Width="{Binding ElementName=}" />
                                     </Grid>
                                 </transformer:LayoutTransformer>
                                 <Grid>
-                                    <TextBlock Text="{Binding UserSolvedCount}" FontSize="132" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="24,0,0,0" />
+                                    <TextBlock Text="{Binding SolvedCount}" FontSize="132" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="24,-10,0,0" />
                                 </Grid>
                             </StackPanel>
                         </StackPanel>

@@ -11,6 +11,7 @@
     <!--Application Resources-->
   <Application.Resources>
     <sys:Double p1:Key="PanoramaItemHeaderFontSize">66</sys:Double>
+
     <Style p1:Key="PanoramaItemHeaderTextStyle" TargetType="TextBlock">
       <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiLight}" />
       <Setter Property="FontSize" Value="{StaticResource PanoramaItemHeaderFontSize}" />
