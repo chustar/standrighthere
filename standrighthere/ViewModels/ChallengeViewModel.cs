@@ -89,7 +89,7 @@ namespace standrighthere.ViewModels
             NotifyPropertyChanged("User");
             NotifyPropertyChanged("Username");
 
-            SolvedCount = await (from challenge in ParseObject.GetQuery("Challenges")
+            SolvedCount = await (from challenge in ParseObject.GetQuery("Challenge")
                                  where challenge.Get<ParseUser>("user") == _challengeObject.Get<ParseUser>("user")
                                  select challenge).CountAsync();
             NotifyPropertyChanged("SolvedCount");

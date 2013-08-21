@@ -16,12 +16,16 @@
     Loaded="Home_Loaded"
     shell:SystemTray.IsVisible="True">
     
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator IsIndeterminate="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Text="Loading new challenges" />
+    </shell:SystemTray.ProgressIndicator>
+    
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
             <phone:Panorama Title="stand right here">
             <phone:PanoramaItem Header="near me" Orientation="Horizontal">
                 <StackPanel>
-                    <ListBox Margin="12,0,0,0" ItemsSource="{Binding Challenges}" >
+                    <ListBox Margin="12,0,0,0" ItemsSource="{Binding Challenges}" SelectionChanged="ListBox_SelectionChanged" >
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <toolkit:WrapPanel Orientation="Horizontal" Width="412" />
@@ -29,7 +33,7 @@
                         </ListBox.ItemsPanel>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Grid Width="173" Height="173" Margin="0,0,32,0">
+                                <Grid Width="173" Height="173" Margin="0,0,16,16">
                                     <Image Source="{Binding Image}" Width="173" Height="173" />
                                     <StackPanel Height="60" VerticalAlignment="Bottom">
                                         <StackPanel.Background>

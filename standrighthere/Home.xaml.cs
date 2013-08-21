@@ -98,5 +98,15 @@ namespace standrighthere
                 NavigationService.Navigate(new Uri("/NewChallenge.xaml", UriKind.Relative));
             }
         }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((sender as ListBox).SelectedItem != null)
+            {
+                App.CurrentChallenge = (sender as ListBox).SelectedItem as ChallengeViewModel;
+                NavigationService.Navigate(new System.Uri(string.Format("/Challenge.xaml"), System.UriKind.Relative));
+                (sender as ListBox).SelectedItem = null;
+            }
+        }
     }
 }

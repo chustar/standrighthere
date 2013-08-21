@@ -38,15 +38,15 @@ namespace standrighthere.ViewModels
 
         async Task LoadData()
         {
-            SolvedCount = await (from challenge in ParseObject.GetQuery("Challenges")
+            SubmittedCount = await (from challenge in ParseObject.GetQuery("Challenge")
                                  where challenge.Get<ParseUser>("user") == _user
                                  select challenge).CountAsync();
-            NotifyPropertyChanged("SolvedCount");
-
-            SubmittedCount = await (from challenge in ParseObject.GetQuery("UserChallengesSolved")
-                                    where challenge.Get<ParseUser>("user") == _user
-                                    select challenge).CountAsync();
             NotifyPropertyChanged("SubmittedCount");
+
+            SolvedCount = await (from challenge in ParseObject.GetQuery("UserChallengeSolved")
+                                    where challenge.Get<ParseUser>("user").Username == _user.Username
+                                    select challenge).CountAsync();
+            NotifyPropertyChanged("SolvedCount");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
