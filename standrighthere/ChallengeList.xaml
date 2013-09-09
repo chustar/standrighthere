@@ -17,7 +17,7 @@
     shell:SystemTray.IsVisible="True"
     >
     <shell:SystemTray.ProgressIndicator>
-        <shell:ProgressIndicator IsIndeterminate="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Text="Loading new challenges" />
+        <shell:ProgressIndicator IsIndeterminate="{Binding IsDataLoading}" IsVisible="{Binding IsDataLoading}" Text="Loading new challenges" />
     </shell:SystemTray.ProgressIndicator>
     
     <Grid x:Name="LayoutRoot" Background="Transparent">

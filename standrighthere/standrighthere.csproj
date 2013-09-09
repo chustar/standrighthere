@@ -120,12 +120,17 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="UserDetailsManager.xaml.cs" />
+    <Compile Include="Utilities\Commands.cs" />
+    <Compile Include="Utilities\Converters.cs" />
     <Compile Include="Utilities\GeoLocationHelper.cs" />
     <Compile Include="Utilities\TimeAgo.cs" />
     <Compile Include="ViewModels\ChallengeViewModel.cs" />
     <Compile Include="ViewModels\ChallengeListViewModel.cs" />
     <Compile Include="ViewModels\CommentViewModel.cs" />
-    <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="Interfaces\ILoadableViewModel.cs" />
+    <Compile Include="ViewModels\CommentListViewModel.cs" />
+    <Compile Include="ViewModels\CurrentUserViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Metro-Camera-256.png" />
+    <Content Include="ReadMe.Coding4Fun.Toolkit.txt" />
     <Content Include="Toolkit.Content\send.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
@@ -208,6 +214,18 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Coding4Fun.Toolkit.Audio">
+      <HintPath>..\packages\Coding4Fun.Toolkit.Audio.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Audio.dll</HintPath>
+    </Reference>
+    <Reference Include="Coding4Fun.Toolkit.Controls">
+      <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Coding4Fun.Toolkit.Net">
+      <HintPath>..\packages\Coding4Fun.Toolkit.Net.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Coding4Fun.Toolkit.Storage">
+      <HintPath>..\packages\Coding4Fun.Toolkit.Storage.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Storage.dll</HintPath>
+    </Reference>
     <Reference Include="LayoutTransformer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=455a3b926e06b656, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Expression.Interactions, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />

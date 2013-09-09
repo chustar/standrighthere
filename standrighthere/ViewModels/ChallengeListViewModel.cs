@@ -9,15 +9,15 @@ using Parse;
 using Windows.Devices.Geolocation;
 using System.Windows;
 using System.Net.Http;
+using standrighthere.Interfaces;
 
 namespace standrighthere.ViewModels
 {
-    public partial class ChallengeListViewModel
+    public partial class ChallengeListViewModel : ILoadableViewModel
     {
         public ChallengeListViewModel()
         {
             Challenges = new ObservableCollection<ChallengeViewModel>();
-            var task = LoadData();
         }
 
         /// <summary>
@@ -31,29 +31,27 @@ namespace standrighthere.ViewModels
         public int CurrentlyLoaded { get; set; }
 
         /// <summary>
-        /// True when the VM is actively loading challenges.
-        /// </summary>
-        public bool IsLoading { get; set; }
-
-        /// <summary>
         /// Begins loading new challenges asynchronously.
         /// </summary>
         /// <param name="skipCount">The number of challenges to skip.</param>
         /// <returns>An awaitable task.</returns>
-        public async Task LoadData(int skipCount = 0)
+        protected async override Task LoadDataImpl(bool forceReload = false)
         {
-            IsLoading = true;
             var geoposition = await Utilities.GeoLocationHelper.GetLocation();
             var geoPoint = new ParseGeoPoint(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
             var query = ParseObject.GetQuery("Challenge");
-            query.WhereNear("location", geoPoint).Limit(20).Skip(skipCount);
+            query.WhereNear("location", geoPoint).Limit(20).Skip(CurrentlyLoaded);
+
+            List<Task> challengeTasks = new List<Task>();
             foreach (var challenge in await query.FindAsync())
             {
-                Challenges.Add(new ChallengeViewModel(challenge));
+                var challengeViewModel = new ChallengeViewModel(challenge);
+                Challenges.Add(challengeViewModel);
+                challengeTasks.Add(challengeViewModel.LoadData());
             }
-            CurrentlyLoaded = skipCount + 20;
-            IsLoading = false;
-        }
+            Task.WaitAll(challengeTasks.ToArray());
 
+            CurrentlyLoaded += 20;
+        }
     }
 }

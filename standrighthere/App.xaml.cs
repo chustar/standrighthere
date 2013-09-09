@@ -15,6 +15,8 @@ using Parse;
 using standrighthere.Resources;
 using standrighthere.ViewModels;
 using Microsoft.Phone.Tasks;
+using System.Windows.Data;
+using System.Globalization;
 
 namespace standrighthere
 {
@@ -26,7 +28,7 @@ namespace standrighthere
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
-        public static UserViewModel UserDetails { get; private set; }
+        public static MainViewModel ViewModel { get; set; }
 
         public static PhotoResult PhotoResult { get; set; }
 
@@ -85,15 +87,10 @@ namespace standrighthere
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
-             //Ensure that application state is restored appropriately
-            //if (!App.UserDetails.IsDataLoaded)
-            //{
-            //    await App.UserDetails.LoadData();
-            //}
-            //if (!App.ViewModel.IsDataLoaded)
-            //{
-            //    App.ViewModel.LoadData();
-            //}
+            if (!App.ViewModel.IsDataLoaded)
+            {
+                var task = App.ViewModel.LoadData();
+            }
         }
 
         // Code to execute when the application is deactivated (sent to background)
@@ -246,6 +243,32 @@ namespace standrighthere
 
                 throw;
             }
+        }
+    }
+    
+    public class NullVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value == null ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    
+    public class NonNullVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value == null ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

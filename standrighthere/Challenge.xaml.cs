@@ -30,7 +30,7 @@ namespace standrighthere
             Map.Center = (await Utilities.GeoLocationHelper.GetLocation()).Coordinate.ToGeoCoordinate();
         }
 
-        private void Pivot_LoadingPivotItem(object sender, PivotItemEventArgs e)
+        private async void Pivot_LoadingPivotItem(object sender, PivotItemEventArgs e)
         {
             if (e.Item.Content != null)
             {
@@ -39,28 +39,20 @@ namespace standrighthere
 
             if (e.Item == (sender as Pivot).Items[2])
             {
-                var longListSelector = new LongListSelector();
-                longListSelector.ItemTemplate = Application.Current.Resources["ListBoxItemTemplate"] as DataTemplate;
-                longListSelector.SelectionChanged += new SelectionChangedEventHandler((Object obj, SelectionChangedEventArgs args) => {
-
-                });
-                longListSelector.DataContext = DataContext;
-                var binding = new Binding("Comments") { Source = (DataContext as ChallengeViewModel).Comments };
-                longListSelector.SetBinding(LongListSelector.ItemsSourceProperty, binding);
-                e.Item.Content = longListSelector;
+                await (DataContext as ChallengeViewModel).CommentListViewModel.LoadData();
             }
         }
 
         private async void Challenges_ItemRealized(object sender, ItemRealizationEventArgs e)
         {
             var challengeViewModel = DataContext as ChallengeViewModel;
-            if (!challengeViewModel.IsLoadingComments && Challenges.ItemsSource != null && Challenges.ItemsSource.Count >= challengeViewModel.CurrentlyLoadedComments)
+            if (Challenges.ItemsSource != null && Challenges.ItemsSource.Count >= challengeViewModel.CommentListViewModel.CurrentlyLoaded)
             {
                 if (e.ItemKind == LongListSelectorItemKind.Item)
                 {
-                    if ((e.Container.Content as ChallengeViewModel).Equals(Challenges.ItemsSource[Challenges.ItemsSource.Count - challengeViewModel.CurrentlyLoadedComments]))
+                    if ((e.Container.Content as ChallengeViewModel).Equals(Challenges.ItemsSource[Challenges.ItemsSource.Count]))
                     {
-                        await challengeViewModel.LoadComments(challengeViewModel.CurrentlyLoadedComments);
+                        await challengeViewModel.CommentListViewModel.LoadData(true);
                     }
                 }
             }
@@ -73,12 +65,12 @@ namespace standrighthere
                 var comment = new ParseObject("Comment")
                 {
                     {"user", ParseUser.CurrentUser},
-                    {"title", NewCommentText.Text.Trim()},
+                    {"commentText", NewCommentText.Text.Trim()},
                 };
                 await comment.SaveAsync();
 
-                (DataContext as ChallengeViewModel).Comments.Add(new CommentViewModel(comment));
-                (DataContext as ChallengeViewModel).CurrentlyLoadedComments++;
+                (DataContext as ChallengeViewModel).CommentListViewModel.Comments.Add(new CommentViewModel(comment));
+                (DataContext as ChallengeViewModel).CommentListViewModel.CurrentlyLoaded++;
                 NewCommentText.Text = "";
                 this.Focus();
             }

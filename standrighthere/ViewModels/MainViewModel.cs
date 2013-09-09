@@ -1,88 +1,84 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Parse;
+using Windows.Devices.Geolocation;
+using System.Windows;
+using System.Net.Http;
 using System.ComponentModel;
-using standrighthere.Resources;
+using standrighthere.Interfaces;
+using System.Windows.Navigation;
 
 namespace standrighthere.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public partial class MainViewModel : ILoadableViewModel, INotifyPropertyChanged
     {
         public MainViewModel()
         {
-            this.Items = new ObservableCollection<ItemViewModel>();
+            User = new CurrentUserViewModel(ParseUser.CurrentUser);
+            ChallengeListViewModel = new ChallengeListViewModel();
         }
 
-        /// <summary>
-        /// A collection for ItemViewModel objects.
-        /// </summary>
-        public ObservableCollection<ItemViewModel> Items { get; private set; }
+        public CurrentUserViewModel User { get; private set; }
 
-        private string _sampleProperty = "Sample Runtime Property Value";
-        /// <summary>
-        /// Sample ViewModel property; this property is used in the view to display its value using a Binding
-        /// </summary>
-        /// <returns></returns>
-        public string SampleProperty
+        private CustomCommand _userCommand;
+        public CustomCommand UserCommand
         {
             get
             {
-                return _sampleProperty;
-            }
-            set
-            {
-                if (value != _sampleProperty)
+                if (_userCommand == null)
                 {
-                    _sampleProperty = value;
-                    NotifyPropertyChanged("SampleProperty");
+                    _userCommand = new CustomCommand(
+                        (object parameter) =>
+                        {
+                            App.RootFrame.Navigate(new Uri("/User.xaml", UriKind.Relative));
+                        },
+                        (object parameter) =>
+                        {
+                            return true == User.IsLoggedIn;
+                        });
                 }
+                return _userCommand;
             }
         }
-
-        /// <summary>
-        /// Sample property that returns a localized string
-        /// </summary>
-        public string LocalizedSampleProperty
+        
+        private CustomCommand _joinCommand;
+        public CustomCommand JoinCommand
         {
             get
             {
-                return AppResources.SampleProperty;
+                if (_joinCommand == null)
+                {
+                    _joinCommand = new CustomCommand(
+                        (object parameter) =>
+                        {
+                            App.RootFrame.Navigate(new Uri("/NewUser.xaml", UriKind.Relative));
+                        },
+                        (object parameter) =>
+                        {
+                            return false == User.IsLoggedIn;
+                        });
+                }
+                return _joinCommand;
             }
         }
 
-        public bool IsDataLoaded
-        {
-            get;
-            private set;
-        }
+        public ChallengeListViewModel ChallengeListViewModel { get; private set; }
 
-        /// <summary>
-        /// Creates and adds a few ItemViewModel objects into the Items collection.
-        /// </summary>
-        public void LoadData()
+        protected async override Task LoadDataImpl(bool forceReload = false)
         {
-            // Sample data; replace with real data
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime one", LineTwo = "Maecenas praesent accumsan bibendum", LineThree = "Facilisi faucibus habitant inceptos interdum lobortis nascetur pharetra placerat pulvinar sagittis senectus sociosqu" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime two", LineTwo = "Dictumst eleifend facilisi faucibus", LineThree = "Suscipit torquent ultrices vehicula volutpat maecenas praesent accumsan bibendum dictumst eleifend facilisi faucibus" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime three", LineTwo = "Habitant inceptos interdum lobortis", LineThree = "Habitant inceptos interdum lobortis nascetur pharetra placerat pulvinar sagittis senectus sociosqu suscipit torquent" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime four", LineTwo = "Nascetur pharetra placerat pulvinar", LineThree = "Ultrices vehicula volutpat maecenas praesent accumsan bibendum dictumst eleifend facilisi faucibus habitant inceptos" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime five", LineTwo = "Maecenas praesent accumsan bibendum", LineThree = "Maecenas praesent accumsan bibendum dictumst eleifend facilisi faucibus habitant inceptos interdum lobortis nascetur" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime six", LineTwo = "Dictumst eleifend facilisi faucibus", LineThree = "Pharetra placerat pulvinar sagittis senectus sociosqu suscipit torquent ultrices vehicula volutpat maecenas praesent" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime seven", LineTwo = "Habitant inceptos interdum lobortis", LineThree = "Accumsan bibendum dictumst eleifend facilisi faucibus habitant inceptos interdum lobortis nascetur pharetra placerat" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime eight", LineTwo = "Nascetur pharetra placerat pulvinar", LineThree = "Pulvinar sagittis senectus sociosqu suscipit torquent ultrices vehicula volutpat maecenas praesent accumsan bibendum" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime nine", LineTwo = "Maecenas praesent accumsan bibendum", LineThree = "Facilisi faucibus habitant inceptos interdum lobortis nascetur pharetra placerat pulvinar sagittis senectus sociosqu" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime ten", LineTwo = "Dictumst eleifend facilisi faucibus", LineThree = "Suscipit torquent ultrices vehicula volutpat maecenas praesent accumsan bibendum dictumst eleifend facilisi faucibus" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime eleven", LineTwo = "Habitant inceptos interdum lobortis", LineThree = "Habitant inceptos interdum lobortis nascetur pharetra placerat pulvinar sagittis senectus sociosqu suscipit torquent" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime twelve", LineTwo = "Nascetur pharetra placerat pulvinar", LineThree = "Ultrices vehicula volutpat maecenas praesent accumsan bibendum dictumst eleifend facilisi faucibus habitant inceptos" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime thirteen", LineTwo = "Maecenas praesent accumsan bibendum", LineThree = "Maecenas praesent accumsan bibendum dictumst eleifend facilisi faucibus habitant inceptos interdum lobortis nascetur" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime fourteen", LineTwo = "Dictumst eleifend facilisi faucibus", LineThree = "Pharetra placerat pulvinar sagittis senectus sociosqu suscipit torquent ultrices vehicula volutpat maecenas praesent" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime fifteen", LineTwo = "Habitant inceptos interdum lobortis", LineThree = "Accumsan bibendum dictumst eleifend facilisi faucibus habitant inceptos interdum lobortis nascetur pharetra placerat" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime sixteen", LineTwo = "Nascetur pharetra placerat pulvinar", LineThree = "Pulvinar sagittis senectus sociosqu suscipit torquent ultrices vehicula volutpat maecenas praesent accumsan bibendum" });
-
-            this.IsDataLoaded = true;
+            IsDataLoading = true;
+            var userTask = User.LoadData(forceReload);
+            var challengeTask = ChallengeListViewModel.LoadData();
+            await Task.WhenAll(userTask, challengeTask);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(String propertyName)
+        private void NotifyPropertyChanged(string propertyName)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (null != handler)

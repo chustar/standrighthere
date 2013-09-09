@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using standrighthere.Utilities;
 using System.ComponentModel;
+using standrighthere.Interfaces;
 
 namespace standrighthere.ViewModels
 {
-    public partial class UserViewModel : INotifyPropertyChanged
+    public partial class UserViewModel : ILoadableViewModel, INotifyPropertyChanged
     {
         public UserViewModel(ParseUser user)
         {
@@ -24,9 +25,25 @@ namespace standrighthere.ViewModels
             }
         }
 
-        public int SolvedCount { get; set; }
+        private int _solvedCount;
+        public int SolvedCount
+        {
+            get
+            {
+                var task = LoadData();
+                return _solvedCount;
+            }
+        }
 
-        public int SubmittedCount { get; set; }
+        private int _submittedCount;
+        public int SubmittedCount
+        {
+            get
+            {
+                var task = LoadData();
+                return _submittedCount;
+            }
+        }
         
         public string CreatedRelative
         {
@@ -36,16 +53,16 @@ namespace standrighthere.ViewModels
             }
         }
 
-        async Task LoadData()
+        protected async override Task LoadDataImpl(bool forceReload = false)
         {
-            SubmittedCount = await (from challenge in ParseObject.GetQuery("Challenge")
-                                 where challenge.Get<ParseUser>("user") == _user
-                                 select challenge).CountAsync();
+            _submittedCount = await (from challenge in ParseObject.GetQuery("Challenge")
+                                    where challenge.Get<ParseUser>("user") == _user
+                                    select challenge).CountAsync();
             NotifyPropertyChanged("SubmittedCount");
 
-            SolvedCount = await (from challenge in ParseObject.GetQuery("UserChallengeSolved")
-                                    where challenge.Get<ParseUser>("user").Username == _user.Username
-                                    select challenge).CountAsync();
+            _solvedCount = await (from challenge in ParseObject.GetQuery("UserChallengeSolved")
+                                 where challenge.Get<ParseUser>("user").Username == _user.Username
+                                 select challenge).CountAsync();
             NotifyPropertyChanged("SolvedCount");
         }
 
@@ -59,6 +76,6 @@ namespace standrighthere.ViewModels
             }
         }
 
-        private ParseUser _user;
+        protected ParseUser _user;
     }
 }

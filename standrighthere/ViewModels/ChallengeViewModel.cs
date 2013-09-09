@@ -9,14 +9,15 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
+using standrighthere.Interfaces;
+
 namespace standrighthere.ViewModels
 {
-    public partial class ChallengeViewModel : INotifyPropertyChanged
+    public partial class ChallengeViewModel : ILoadableViewModel, INotifyPropertyChanged
     {
         public ChallengeViewModel(ParseObject challengeObject)
         {
             _challengeObject = challengeObject;
-            Comments = new ObservableCollection<CommentViewModel>();
 
             var task = LoadData();
         }
@@ -56,9 +57,7 @@ namespace standrighthere.ViewModels
         }
 
         public int SolvedCount { get; set; }
-        
-        public ObservableCollection<CommentViewModel> Comments { get; set; }
-        
+
         public DateTime Created
         {
             get
@@ -74,51 +73,47 @@ namespace standrighthere.ViewModels
                 return TimeAgo.GetTimeAgo(Created);
             }
         }
+
+        public CommentListViewModel _commentListViewModel;
+        public CommentListViewModel CommentListViewModel
+        {
+            get
+            {
+                var task = _commentListViewModel.LoadData();
+                return _commentListViewModel;
+            }
+        }
         
-        public bool IsLoadingComments { get; set; }
-
-        public int CurrentlyLoadedComments { get; set; }
-
         /// <summary>
         /// Load the ChallengeViewModels' data.
         /// </summary>
         /// <returns>An awaitable task.</returns>
-        public async Task LoadData()
+        protected async override Task LoadDataImpl(bool forceReload = false)
         {
-            User = new UserViewModel(await _challengeObject.Get<ParseUser>("user").FetchAsync() as ParseUser);
-            NotifyPropertyChanged("User");
-            NotifyPropertyChanged("Username");
-
-            SolvedCount = await (from challenge in ParseObject.GetQuery("Challenge")
-                                 where challenge.Get<ParseUser>("user") == _challengeObject.Get<ParseUser>("user")
-                                 select challenge).CountAsync();
-            NotifyPropertyChanged("SolvedCount");
-
-            var task = LoadComments();
-        }
-
-        /// <summary>
-        /// Loads the challenges comments asynchronously.
-        /// </summary>
-        /// <param name="skipCount">How many comments to skip. Defaults to 0.</param>
-        /// <returns>And awaitable task.</returns>
-        public async Task LoadComments(int skipCount = 0)
-        {
-            IsLoadingComments = true;
-            var query = ParseObject.GetQuery("Comment");
-            query.Limit(20).Skip(skipCount);
-            foreach (var comment in await query.FindAsync())
+            if (forceReload || (!IsDataLoading && !IsDataLoaded))
             {
-                Comments.Add(new CommentViewModel(comment));
+                IsDataLoading = true;
+
+                User = new UserViewModel(_challengeObject.Get<ParseUser>("user") as ParseUser);
+                var userTask = User.LoadData();
+                var solvedCountTask = (from challenge in ParseObject.GetQuery("Challenge")
+                                     where challenge.Get<ParseUser>("user") == _challengeObject.Get<ParseUser>("user")
+                                     select challenge).CountAsync();
+                var commentsTask = CommentListViewModel.LoadData();
+
+                await Task.WhenAll(userTask, solvedCountTask, commentsTask);
+                SolvedCount = solvedCountTask.Result;
+                NotifyPropertyChanged("User");
+                NotifyPropertyChanged("SolvedCount");
+
+                IsDataLoading = false;
+                IsDataLoaded = true;
             }
-            CurrentlyLoadedComments = skipCount + 20;
-            IsLoadingComments = false;
         }
-        
+
         private ParseObject _challengeObject;
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         private void NotifyPropertyChanged(string propertyName)
         {
             PropertyChangedEventHandler handler = PropertyChanged;

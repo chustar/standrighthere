@@ -27,13 +27,13 @@ namespace standrighthere
         private ChallengeListViewModel _viewModel = new ChallengeListViewModel();
         private async void LongListSelector_ItemRealized(object sender, ItemRealizationEventArgs e)
         {
-            if (!_viewModel.IsLoading && Challenges.ItemsSource != null && Challenges.ItemsSource.Count >= _viewModel.CurrentlyLoaded)
+            if (!_viewModel.IsDataLoading && Challenges.ItemsSource != null && Challenges.ItemsSource.Count >= _viewModel.CurrentlyLoaded)
             {
                 if (e.ItemKind == LongListSelectorItemKind.Item)
                 {
                     if ((e.Container.Content as ChallengeViewModel).Equals(Challenges.ItemsSource[Challenges.ItemsSource.Count - _viewModel.CurrentlyLoaded]))
                     {
-                        await _viewModel.LoadData(_viewModel.CurrentlyLoaded);
+                        await _viewModel.LoadData(true);
                     }
                 }
             }

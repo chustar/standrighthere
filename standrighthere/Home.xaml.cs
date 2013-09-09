@@ -20,10 +20,10 @@ namespace standrighthere
         {
             InitializeComponent();
 
-            if (ParseUser.CurrentUser != null)
-            {
-                HomeViewModel.User = new UserViewModel(ParseUser.CurrentUser);
-            }
+            //if (ParseUser.CurrentUser != null)
+            //{
+            //    HomeViewModel.User = new UserViewModel(ParseUser.CurrentUser);
+            //}
             DataContext = HomeViewModel;
         }
 
@@ -41,14 +41,14 @@ namespace standrighthere
             }
         }
 
-        private HomeViewModel homeViewModel;
-        private HomeViewModel HomeViewModel
+        private MainViewModel homeViewModel;
+        private MainViewModel HomeViewModel
         {
             get
             {
                 if (homeViewModel == null)
                 {
-                    homeViewModel = new HomeViewModel();
+                    homeViewModel = new MainViewModel();
                 }
                 return homeViewModel;
             }
@@ -58,25 +58,6 @@ namespace standrighthere
 
         private void Home_Loaded(object sender, RoutedEventArgs e)
         {
-            if (ParseUser.CurrentUser == null)
-            {
-                Join.Visibility = System.Windows.Visibility.Visible;
-                MessageBoxResult m = MessageBox.Show(
-                    "You do not seem to be registered on stand right here.\n" +
-                    "Would you like to register?",
-                    "Register",
-                    MessageBoxButton.OKCancel
-                    );
-
-                if (m == MessageBoxResult.OK)
-                {
-                    NavigationService.Navigate(new Uri("/NewUser.xaml", UriKind.Relative));
-                }
-            }
-            else
-            {
-                UserDetails.Visibility = System.Windows.Visibility.Visible;
-            }
         }
 
         private void Begin_PhotoChooserTask(object sender, RoutedEventArgs e)
@@ -106,6 +87,31 @@ namespace standrighthere
                 App.CurrentChallenge = (sender as ListBox).SelectedItem as ChallengeViewModel;
                 NavigationService.Navigate(new System.Uri(string.Format("/Challenge.xaml"), System.UriKind.Relative));
                 (sender as ListBox).SelectedItem = null;
+            }
+        }
+        
+        private async void LongListSelector_ItemRealized(object sender, ItemRealizationEventArgs e)
+        {
+            var challengeListViewModel = App.ViewModel.ChallengeListViewModel;
+            if (!challengeListViewModel.IsDataLoading && Challenges.ItemsSource != null && Challenges.ItemsSource.Count >= challengeListViewModel.CurrentlyLoaded)
+            {
+                if (e.ItemKind == LongListSelectorItemKind.Item)
+                {
+                    if ((e.Container.Content as ChallengeViewModel).Equals(Challenges.ItemsSource[Challenges.ItemsSource.Count - challengeListViewModel.CurrentlyLoaded]))
+                    {
+                        await challengeListViewModel.LoadData(true);
+                    }
+                }
+            }
+        }
+
+        private void Challenges_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((sender as LongListSelector).SelectedItem != null)
+            {
+                App.CurrentChallenge = (sender as LongListSelector).SelectedItem as ChallengeViewModel;
+                NavigationService.Navigate(new System.Uri(string.Format("/Challenge.xaml"), System.UriKind.Relative));
+                (sender as LongListSelector).SelectedItem = null;
             }
         }
     }
