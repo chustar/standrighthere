@@ -16,7 +16,10 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     Loaded="Home_Loaded"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.Opacity="1.0"
+    shell:SystemTray.BackgroundColor="Green"
+    >
     
     <shell:SystemTray.ProgressIndicator>
         <shell:ProgressIndicator IsIndeterminate="{Binding IsDataLoading}" IsVisible="{Binding IsDataLoading}" Text="Loading new challenges" />
@@ -29,16 +32,16 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <Grid Grid.Row="0" Margin="12,17,12,28" DataContext="{Binding User}">
+        <Grid Grid.Row="0" DataContext="{Binding User}" Background="Gray">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="124" />
             </Grid.ColumnDefinitions>
             
-            <TextBlock Grid.Column="0" Text="STAND RIGHT HERE" FontSize="24" FontWeight="SemiBold" />
+            <TextBlock Grid.Column="0" Text="STAND RIGHT HERE" FontSize="{StaticResource PhoneFontSizeLarge}" FontWeight="SemiBold" VerticalAlignment="Center" Margin="12,8,0,8" />
             
-            <Button Grid.Column="1" Content="ME" Command="{Binding UserCommand}" Visibility="{Binding IsLoggedIn, Converter={StaticResource VisibilityConverter}}" />
-            <Button Grid.Column="1" Content="JOIN" Command="{Binding JoinCommand}" Visibility="{Binding IsLoggedIn, Converter={StaticResource NegativeVisibilityConverter}}" />
+            <Button Grid.Column="1" Content="ME" Command="{Binding UserCommand}" Visibility="{Binding IsLoggedIn, Converter={StaticResource VisibilityConverter}}" Style="{StaticResource BasicButtonStyle}" Padding="0" />
+            <Button Grid.Column="1" Content="JOIN" Command="{Binding JoinCommand}" Visibility="{Binding IsLoggedIn, Converter={StaticResource NegativeVisibilityConverter}}" Style="{StaticResource BasicButtonStyle}" Padding="0" />
         </Grid>
 
         <phone:LongListSelector Grid.Row="1" x:Name="Challenges" ItemsSource="{Binding Challenges}" ItemRealized="LongListSelector_ItemRealized" SelectionChanged="Challenges_SelectionChanged">
