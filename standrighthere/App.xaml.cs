@@ -70,6 +70,8 @@ namespace standrighthere
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+            ViewModel = new MainViewModel();
+
             ParseClient.Initialize("NhHOvcjOPfG9X4LKbaAID5FDeK4azh4ztb9LFdtt", "yubl7PgLAdxXs60WWHDi7iSURCzLRR0xJGTAn9MS");
             this.Startup += (sender, args) =>
             {

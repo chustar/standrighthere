@@ -25,42 +25,34 @@ namespace standrighthere.ViewModels
 
         public CurrentUserViewModel User { get; private set; }
 
-        private CustomCommand _userCommand;
-        public CustomCommand UserCommand
+        private SimpleCommand _userCommand;
+        public SimpleCommand UserCommand
         {
             get
             {
                 if (_userCommand == null)
                 {
-                    _userCommand = new CustomCommand(
+                    _userCommand = new SimpleCommand(
                         (object parameter) =>
                         {
                             App.RootFrame.Navigate(new Uri("/User.xaml", UriKind.Relative));
-                        },
-                        (object parameter) =>
-                        {
-                            return true == User.IsLoggedIn;
                         });
                 }
                 return _userCommand;
             }
         }
         
-        private CustomCommand _joinCommand;
-        public CustomCommand JoinCommand
+        private SimpleCommand _joinCommand;
+        public SimpleCommand JoinCommand
         {
             get
             {
                 if (_joinCommand == null)
                 {
-                    _joinCommand = new CustomCommand(
+                    _joinCommand = new SimpleCommand(
                         (object parameter) =>
                         {
                             App.RootFrame.Navigate(new Uri("/NewUser.xaml", UriKind.Relative));
-                        },
-                        (object parameter) =>
-                        {
-                            return false == User.IsLoggedIn;
                         });
                 }
                 return _joinCommand;
@@ -71,7 +63,6 @@ namespace standrighthere.ViewModels
 
         protected async override Task LoadDataImpl(bool forceReload = false)
         {
-            IsDataLoading = true;
             var userTask = User.LoadData(forceReload);
             var challengeTask = ChallengeListViewModel.LoadData();
             await Task.WhenAll(userTask, challengeTask);

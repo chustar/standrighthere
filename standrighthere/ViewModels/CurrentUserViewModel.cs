@@ -23,7 +23,7 @@ namespace standrighthere.ViewModels
             }
         }
 
-        public string Username
+        public new string Username
         {
             get
             {

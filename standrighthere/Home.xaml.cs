@@ -20,55 +20,17 @@ namespace standrighthere
         {
             InitializeComponent();
 
-            //if (ParseUser.CurrentUser != null)
-            //{
-            //    HomeViewModel.User = new UserViewModel(ParseUser.CurrentUser);
-            //}
-            DataContext = HomeViewModel;
+            DataContext = App.ViewModel;
         }
 
         // Load data for the ViewModel Items
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (!HomeViewModel.IsDataLoaded)
+            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled= App.ViewModel.User.IsLoggedIn;
+            if (!App.ViewModel.IsDataLoaded)
             {
-                SystemTray.ProgressIndicator = new ProgressIndicator();
-                SystemTray.ProgressIndicator.IsVisible= true;
-                SystemTray.ProgressIndicator.IsIndeterminate = true;
-                SystemTray.ProgressIndicator.Text = "Loading...";
-                await HomeViewModel.LoadData();
-                SystemTray.ProgressIndicator.IsVisible= false;
+                await App.ViewModel.LoadData();
             }
-        }
-
-        private MainViewModel homeViewModel;
-        private MainViewModel HomeViewModel
-        {
-            get
-            {
-                if (homeViewModel == null)
-                {
-                    homeViewModel = new MainViewModel();
-                }
-                return homeViewModel;
-            }
-        }
-
-        public UserViewModel User { get; private set; }
-
-        private void Home_Loaded(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void Begin_PhotoChooserTask(object sender, RoutedEventArgs e)
-        {
-            var photoTask = new PhotoChooserTask();
-            photoTask.PixelHeight = 480;
-            photoTask.PixelWidth = 480;
-            photoTask.ShowCamera = true;
-            photoTask.Completed += Complete_PhotoChooserTask;
-
-            photoTask.Show();
         }
 
         void Complete_PhotoChooserTask(object sender, PhotoResult e)
@@ -80,38 +42,31 @@ namespace standrighthere
             }
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void NewChallenge_Click(object sender, EventArgs e)
         {
-            if ((sender as ListBox).SelectedItem != null)
-            {
-                App.CurrentChallenge = (sender as ListBox).SelectedItem as ChallengeViewModel;
-                NavigationService.Navigate(new System.Uri(string.Format("/Challenge.xaml"), System.UriKind.Relative));
-                (sender as ListBox).SelectedItem = null;
-            }
-        }
-        
-        private async void LongListSelector_ItemRealized(object sender, ItemRealizationEventArgs e)
-        {
-            var challengeListViewModel = App.ViewModel.ChallengeListViewModel;
-            if (!challengeListViewModel.IsDataLoading && Challenges.ItemsSource != null && Challenges.ItemsSource.Count >= challengeListViewModel.CurrentlyLoaded)
-            {
-                if (e.ItemKind == LongListSelectorItemKind.Item)
-                {
-                    if ((e.Container.Content as ChallengeViewModel).Equals(Challenges.ItemsSource[Challenges.ItemsSource.Count - challengeListViewModel.CurrentlyLoaded]))
-                    {
-                        await challengeListViewModel.LoadData(true);
-                    }
-                }
-            }
+            var photoTask = new PhotoChooserTask();
+            photoTask.PixelHeight = 480;
+            photoTask.PixelWidth = 480;
+            photoTask.ShowCamera = true;
+            photoTask.Completed += Complete_PhotoChooserTask;
+
+            photoTask.Show();
         }
 
-        private void Challenges_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void Refresh_Click(object sender, EventArgs e)
         {
-            if ((sender as LongListSelector).SelectedItem != null)
+            await App.ViewModel.LoadData(true);
+        }
+
+        private void Settings_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ApplicationBar_StateChanged(object sender, ApplicationBarStateChangedEventArgs e)
+        {
+            if (e.IsMenuVisible)
             {
-                App.CurrentChallenge = (sender as LongListSelector).SelectedItem as ChallengeViewModel;
-                NavigationService.Navigate(new System.Uri(string.Format("/Challenge.xaml"), System.UriKind.Relative));
-                (sender as LongListSelector).SelectedItem = null;
             }
         }
     }

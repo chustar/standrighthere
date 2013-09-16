@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:local="clr-namespace:standrighthere"
+    xmlns:controls="clr-namespace:standrighthere.Controls"
     xmlns:utilities="clr-namespace:standrighthere.Utilities"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -15,14 +16,12 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    Loaded="Home_Loaded"
     shell:SystemTray.IsVisible="True"
-    shell:SystemTray.Opacity="1.0"
-    shell:SystemTray.BackgroundColor="Green"
+    shell:SystemTray.Opacity="1"
     >
     
     <shell:SystemTray.ProgressIndicator>
-        <shell:ProgressIndicator IsIndeterminate="{Binding IsDataLoading}" IsVisible="{Binding IsDataLoading}" Text="Loading new challenges" />
+        <shell:ProgressIndicator IsIndeterminate="True" IsVisible="{Binding IsDataLoading}" Text="Loading new challenges" />
     </shell:SystemTray.ProgressIndicator>
     
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -32,53 +31,19 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <Grid Grid.Row="0" DataContext="{Binding User}" Background="Gray">
+        <Grid Grid.Row="0" Background="Gray" Height="56">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="124" />
             </Grid.ColumnDefinitions>
             
-            <TextBlock Grid.Column="0" Text="STAND RIGHT HERE" FontSize="{StaticResource PhoneFontSizeLarge}" FontWeight="SemiBold" VerticalAlignment="Center" Margin="12,8,0,8" />
+            <TextBlock Grid.Column="0" Text="STAND RIGHT HERE" FontSize="{StaticResource PhoneFontSizeNormal}" FontWeight="SemiBold" VerticalAlignment="Center" Margin="12,8,0,8" />
             
-            <Button Grid.Column="1" Content="ME" Command="{Binding UserCommand}" Visibility="{Binding IsLoggedIn, Converter={StaticResource VisibilityConverter}}" Style="{StaticResource BasicButtonStyle}" Padding="0" />
-            <Button Grid.Column="1" Content="JOIN" Command="{Binding JoinCommand}" Visibility="{Binding IsLoggedIn, Converter={StaticResource NegativeVisibilityConverter}}" Style="{StaticResource BasicButtonStyle}" Padding="0" />
+            <Button Grid.Column="1" Content="ME" Command="{Binding UserCommand}" Visibility="{Binding User.IsLoggedIn, Converter={StaticResource VisibilityConverter}}" Style="{StaticResource BasicButtonStyle}" Padding="0" />
+            <Button Grid.Column="1" Content="JOIN" Command="{Binding JoinCommand}" Visibility="{Binding User.IsLoggedIn, Converter={StaticResource NegativeVisibilityConverter}}" Style="{StaticResource BasicButtonStyle}" Padding="0" />
         </Grid>
 
-        <phone:LongListSelector Grid.Row="1" x:Name="Challenges" ItemsSource="{Binding Challenges}" ItemRealized="LongListSelector_ItemRealized" SelectionChanged="Challenges_SelectionChanged">
-            <phone:LongListSelector.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="30,0,0,16" Height="120">
-                        <Grid>
-                            <Image Source="{Binding Image}" Height="120" Width="120" />
-                            <StackPanel Background="Red" VerticalAlignment="Bottom">
-                                <TextBlock Text="{Binding Distance}" Padding="2" FontSize="{StaticResource PhoneFontSizeLarge}" />
-                            </StackPanel>
-                        </Grid>
-                        <StackPanel Width="324" Margin="12,0,0,0">
-                            <TextBlock Text="{Binding Title}" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextTrimming="WordEllipsis" />
-                            <StackPanel Orientation="Horizontal" Margin="12">
-                                <StackPanel Orientation="Horizontal">
-                                    <transformer:LayoutTransformer>
-                                        <transformer:LayoutTransformer.LayoutTransform>
-                                            <RotateTransform Angle="270"/>
-                                        </transformer:LayoutTransformer.LayoutTransform>
-                                        <Grid Background="Red">
-                                            <TextBlock Text="solved" FontSize="{StaticResource PhoneFontSizeSmall}" HorizontalAlignment="Center" Padding="4" Margin="0,-3,0,0" />
-                                        </Grid>
-                                    </transformer:LayoutTransformer>
-                                    <TextBlock Text="{Binding SolvedCount}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" Margin="12,0,0,0" Width="120" />
-                                </StackPanel>
-                                <StackPanel>
-                                    <TextBlock DataContext="{Binding User}" Text="{Binding Username}" Margin="10,0,0,0" Style="{StaticResource PhoneTextSubtleStyle}" />
-                                    <TextBlock Text="{Binding CreatedRelative}" Style="{StaticResource PhoneTextSubtleStyle}" Margin="10,0,0,0" VerticalAlignment="Bottom" />
-                                </StackPanel>
-                            </StackPanel>
-                        </StackPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </phone:LongListSelector.ItemTemplate>
-        </phone:LongListSelector>
-
+        <controls:ChallengeListControl Grid.Row="1" DataContext="{Binding ChallengeListViewModel}" />
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to
@@ -87,6 +52,15 @@
 
             Before shipping remove this XAML and the image itself.-->
         <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
-
     </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" StateChanged="ApplicationBar_StateChanged">
+            <shell:ApplicationBarIconButton IconUri="Toolkit.Content/feature.camera.png" Text="new challenge" Click="NewChallenge_Click" />
+            <shell:ApplicationBarIconButton IconUri="Toolkit.Content/refresh.png" Text="refresh" Click="Refresh_Click" />
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="settings" Click="Settings_Click" />
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>
