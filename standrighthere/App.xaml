@@ -27,18 +27,17 @@
         </Style>
 
         <Style TargetType="TextBlock" x:Name="TextboxTitleStyle">
-            <Setter Property="Margin" Value="12,0,0,0" />
+            <Setter Property="Margin" Value="12,0,0,-8" />
             <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}" />
             <Setter Property="Foreground" Value="Gray" />
         </Style>
 
         <Style TargetType="Button" x:Name="ActionButton">
-            <Setter Property="Margin" Value="0,32,0,0" />
+            <Setter Property="Margin" Value="0,16,0,0" />
             <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeLarge}" />
         </Style>
 
         <Style TargetType="toolkit:PhoneTextBox" x:Name="FormTextBox">
-            <Setter Property="Margin" Value="0,0,0,32" />
             <Setter Property="HintStyle">
                 <Setter.Value>
                     <Style TargetType="ContentControl">
@@ -46,10 +45,19 @@
                     </Style>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Margin" Value="0,0,0,12" />
             <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeLarge}" />
             <Setter Property="Width" Value="420" />
             <Setter Property="BorderThickness" Value="0" />
         </Style>
+        
+        <Style TargetType="PasswordBox" x:Name="FormPasswordBox">
+            <Setter Property="Margin" Value="0,0,0,12" />
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeLarge}" />
+            <Setter Property="Width" Value="420" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+
 
         <Style x:Key="HyperlinkStyle" TargetType="HyperlinkButton">
             <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}" />
@@ -64,7 +72,12 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
+        
+        <Style x:Key="StackPanelFormStyle" TargetType="StackPanel">
+            <Setter Property="Background" Value="LightBlue" />
+            <Setter Property="Margin" Value="0,0,0,32" />
+        </Style>
+        
         <Style x:Name="BasicButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}" />
             <Setter Property="Margin" Value="0" />

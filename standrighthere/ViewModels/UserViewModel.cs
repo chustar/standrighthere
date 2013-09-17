@@ -52,7 +52,7 @@ namespace standrighthere.ViewModels
                 return TimeAgo.GetTimeAgo(_user.CreatedAt.Value);
             }
         }
-
+        
         protected async override Task LoadDataImpl(bool forceReload = false)
         {
             _submittedCount = await (from challenge in ParseObject.GetQuery("Challenge")

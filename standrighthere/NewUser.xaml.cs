@@ -10,6 +10,8 @@ using Microsoft.Phone.Shell;
 using System.Threading.Tasks;
 
 using Parse;
+using Windows.UI.ViewManagement;
+using standrighthere.ViewModels;
 
 namespace standrighthere
 {
@@ -18,48 +20,15 @@ namespace standrighthere
         public NewUser()
         {
             InitializeComponent();
+
+            DataContext = new NewUserViewModel();
+
+            InputPane.GetForCurrentView().Showing += NewUser_Showing;
         }
 
-        private async void Register(object sender, RoutedEventArgs args)
+        private void NewUser_Showing(InputPane sender, InputPaneVisibilityEventArgs args)
         {
-            try
-            {
-                var user = new ParseUser()
-                {
-                    Email = RegisterEmail.Text,
-                    Username = RegisterUsername.Text,
-                    Password = RegisterPassword.Password
-                };
-
-                await user.SignUpAsync();
-                var userDetails = new ParseObject("UserDetails")
-                {
-                    {"user", user}
-                };
-                await userDetails.SaveAsync();
-                //await App.UserDetails.LoadData();
-
-                NavigationService.Navigate(new Uri("/UserDetailsManager.xaml", UriKind.Relative));
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("That username has already been taken. Please try another one.");
-            }
-        }
-
-        private async void Login(object sender, RoutedEventArgs args)
-        {
-            try
-            {
-                await ParseUser.LogInAsync(LoginUsername.Text, LoginPassword.Password);
-                //await App.UserDetails.LoadData();
-
-                NavigationService.Navigate(new Uri("/UserDetailsManager.xaml", UriKind.Relative));
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("The password is incorrect.");
-            }
+            ScrollView.ScrollToVerticalOffset((PivotControl.SelectedItem as PivotItem).ActualHeight);
         }
     }
 }
