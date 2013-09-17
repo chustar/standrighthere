@@ -89,7 +89,7 @@ namespace standrighthere.ViewModels
                         },
                         (object parameter) =>
                         {
-                            return Email.Trim() != System.String.Empty && Username.Trim() != "" && Password.Trim() != "";
+                            return Email.Trim() != System.String.Empty && Username.Trim() != System.String.Empty && Password.Trim() != System.String.Empty;
                         });
                 }
                 return _registerCommand;
@@ -119,7 +119,7 @@ namespace standrighthere.ViewModels
                         },
                         (object parameter) =>
                         {
-                            return Username.Trim() != System.String.Empty && Password.Trim() != "";
+                            return Username.Trim() != System.String.Empty && Password.Trim() != System.String.Empty;
                         });
                 }
                 return _loginCommand;
