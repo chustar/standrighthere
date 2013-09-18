@@ -72,7 +72,10 @@ namespace standrighthere
 
         public void RaiseCanExecuteChanged()
         {
-            CanExecuteChanged(this, EventArgs.Empty);
+            if (CanExecuteChanged != null)
+            {
+                CanExecuteChanged(this, EventArgs.Empty);
+            }
         }
 
         public event EventHandler CanExecuteChanged;

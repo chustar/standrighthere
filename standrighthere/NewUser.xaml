@@ -30,27 +30,27 @@
                 <phone:PivotItem Header="register">
                     <StackPanel x:Name="JoinControl" HorizontalAlignment="Center">
                         <TextBlock Text="EMAIL" Style="{StaticResource TextboxTitleStyle}" />
-                        <toolkit:PhoneTextBox Hint="me@example.com" Style="{StaticResource FormTextBox}" Text="{Binding Email}" c4f:TextBinding.UpdateSourceOnChange="True" />
+                        <toolkit:PhoneTextBox Hint="me@example.com" Style="{StaticResource FormTextBox}" Text="{Binding Email, Mode=TwoWay}" c4f:TextBinding.UpdateSourceOnChange="True" />
 
                         <TextBlock Text="USERNAME" Style="{StaticResource TextboxTitleStyle}" />
-                        <toolkit:PhoneTextBox Hint="urbansherpa" Style="{StaticResource FormTextBox}" Text="{Binding Username}" c4f:TextBinding.UpdateSourceOnChange="True" />
+                        <toolkit:PhoneTextBox Hint="urbansherpa" Style="{StaticResource FormTextBox}" Text="{Binding Username, Mode=TwoWay}" c4f:TextBinding.UpdateSourceOnChange="True" />
 
                         <TextBlock Text="PASSWORD" Style="{StaticResource TextboxTitleStyle}" />
-                        <PasswordBox Style="{StaticResource FormPasswordBox}" Password="{Binding Password}" c4f:TextBinding.UpdateSourceOnChange="True" />
+                        <PasswordBox Style="{StaticResource FormPasswordBox}" Password="{Binding Password, Mode=TwoWay}" c4f:TextBinding.UpdateSourceOnChange="True" />
 
-                        <Button x:Name="JoinButton" Content="JOIN" Style="{StaticResource ActionButton}" Command="{Binding JoinCommand}" />
+                        <Button Content="JOIN" Style="{StaticResource ActionButton}" Command="{Binding JoinCommand}" />
                     </StackPanel>
                 </phone:PivotItem>
 
                 <phone:PivotItem Header="login">
                     <StackPanel x:Name="LoginControl" HorizontalAlignment="Center">
                         <TextBlock Text="USERNAME" Style="{StaticResource TextboxTitleStyle}" />
-                        <toolkit:PhoneTextBox Hint="urbansherpa" Style="{StaticResource FormTextBox}" Text="{Binding Username}" c4f:TextBinding.UpdateSourceOnChange="True" />
+                        <toolkit:PhoneTextBox Hint="urbansherpa" Style="{StaticResource FormTextBox}" Text="{Binding Username, Mode=TwoWay}" c4f:TextBinding.UpdateSourceOnChange="True" />
 
                         <TextBlock Text="PASSWORD" Style="{StaticResource TextboxTitleStyle}" />
-                        <PasswordBox Style="{StaticResource FormPasswordBox}" Password="{Binding Password}" c4f:TextBinding.UpdateSourceOnChange="True" />
+                        <PasswordBox Style="{StaticResource FormPasswordBox}" Password="{Binding Password, Mode=TwoWay}" c4f:TextBinding.UpdateSourceOnChange="True" />
 
-                        <Button x:Name="LoginButton" Content="LOG IN" Style="{StaticResource ActionButton}" Command="{Binding LoginCommand}" />
+                        <Button Content="LOG IN" Style="{StaticResource ActionButton}" Command="{Binding LoginCommand}" />
                     </StackPanel>
                 </phone:PivotItem>
             </phone:Pivot>

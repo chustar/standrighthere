@@ -20,7 +20,7 @@ namespace standrighthere.ViewModels
             set 
             {
                 _email = value;
-                RegisterCommand.RaiseCanExecuteChanged();
+                JoinCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -34,7 +34,7 @@ namespace standrighthere.ViewModels
             set 
             {
                 _username = value;
-                RegisterCommand.RaiseCanExecuteChanged();
+                JoinCommand.RaiseCanExecuteChanged();
                 LoginCommand.RaiseCanExecuteChanged();
             }
         }
@@ -49,19 +49,19 @@ namespace standrighthere.ViewModels
             set 
             {
                 _password = value;
-                RegisterCommand.RaiseCanExecuteChanged();
+                JoinCommand.RaiseCanExecuteChanged();
                 LoginCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private CustomCommand _registerCommand;
-        public CustomCommand RegisterCommand
+        private CustomCommand _joinCommand;
+        public CustomCommand JoinCommand
         {
             get
             {
-                if (_registerCommand == null)
+                if (_joinCommand == null)
                 {
-                    _registerCommand = new CustomCommand(
+                    _joinCommand = new CustomCommand(
                         async (object parameter) =>
                         {
                             try
@@ -75,16 +75,16 @@ namespace standrighthere.ViewModels
 
                                 await user.SignUpAsync();
                                 var userDetails = new ParseObject("UserDetails")
-                {
-                    {"user", user}
-                };
+                                {
+                                    {"user", user}
+                                };
                                 await userDetails.SaveAsync();
 
                                 App.RootFrame.Navigate(new Uri("/UserDetailsManager.xaml", UriKind.Relative));
                             }
                             catch (Exception)
                             {
-                                MessageBox.Show("That username has already been taken. Please try another one.");
+                                MessageBox.Show("That user name has already been taken. Please try another one.");
                             }
                         },
                         (object parameter) =>
@@ -92,7 +92,7 @@ namespace standrighthere.ViewModels
                             return Email.Trim() != System.String.Empty && Username.Trim() != System.String.Empty && Password.Trim() != System.String.Empty;
                         });
                 }
-                return _registerCommand;
+                return _joinCommand;
             }
         }
 
