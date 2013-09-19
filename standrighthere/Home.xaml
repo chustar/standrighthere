@@ -11,7 +11,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:transformer="clr-namespace:System.Windows.Controls;assembly=LayoutTransformer"
-    mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -31,17 +30,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <Grid Grid.Row="0" Background="Gray" Height="56">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="124" />
-            </Grid.ColumnDefinitions>
-            
-            <TextBlock Grid.Column="0" Text="STAND RIGHT HERE" FontSize="{StaticResource PhoneFontSizeNormal}" FontWeight="SemiBold" VerticalAlignment="Center" Margin="12,8,0,8" />
-            
-            <Button Grid.Column="1" Content="ME" Command="{Binding UserCommand}" Visibility="{Binding User.IsLoggedIn, Converter={StaticResource VisibilityConverter}}" Style="{StaticResource BasicButtonStyle}" Padding="0" />
-            <Button Grid.Column="1" Content="JOIN" Command="{Binding JoinCommand}" Visibility="{Binding User.IsLoggedIn, Converter={StaticResource NegativeVisibilityConverter}}" Style="{StaticResource BasicButtonStyle}" Padding="0" />
-        </Grid>
+        <controls:HeaderControl Grid.Row="0" />
 
         <controls:ChallengeListControl Grid.Row="1" DataContext="{Binding ChallengeListViewModel}" />
 
@@ -55,7 +44,7 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" StateChanged="ApplicationBar_StateChanged">
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton IconUri="Toolkit.Content/feature.camera.png" Text="new challenge" Click="NewChallenge_Click" />
             <shell:ApplicationBarIconButton IconUri="Toolkit.Content/refresh.png" Text="refresh" Click="Refresh_Click" />
             <shell:ApplicationBar.MenuItems>

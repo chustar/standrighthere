@@ -18,6 +18,8 @@
         <utilities:VisibilityConverter x:Key="VisibilityConverter" />
         <utilities:NegativeVisibilityConverter x:Key="NegativeVisibilityConverter" />
 
+        <SolidColorBrush Color="LightGray" x:Key="Background" />
+        
         <sys:Double p1:Key="PanoramaItemHeaderFontSize">66</sys:Double>
 
         <Style p1:Key="PanoramaItemHeaderTextStyle" TargetType="TextBlock">

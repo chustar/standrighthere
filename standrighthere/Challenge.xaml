@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:maps="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
+    xmlns:controls="clr-namespace:standrighthere.Controls"
     xmlns:transform="clr-namespace:System.Windows.Controls;assembly=LayoutTransformer"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d"
@@ -16,8 +17,18 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <phone:Pivot Title="STAND RIGHT HERE" LoadingPivotItem="Pivot_LoadingPivotItem">
+    <Grid x:Name="LayoutRoot" Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <controls:HeaderControl Grid.Row="0" /> 
+        
+        <phone:Pivot Grid.Row="1" LoadingPivotItem="Pivot_LoadingPivotItem">
+            <phone:Pivot.TitleTemplate>
+                <DataTemplate />
+            </phone:Pivot.TitleTemplate>
             <phone:PivotItem Header="challenge">
                 <StackPanel>
                     <Image Source="{Binding Image}" Width="420" Height="420" Margin="0,0,0,24" />

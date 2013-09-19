@@ -62,12 +62,5 @@ namespace standrighthere
         {
 
         }
-
-        private void ApplicationBar_StateChanged(object sender, ApplicationBarStateChangedEventArgs e)
-        {
-            if (e.IsMenuVisible)
-            {
-            }
-        }
     }
 }

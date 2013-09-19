@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="standrighthere.Controls.HeaderControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+    
+        <Grid Background="Gray" Height="56">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="124" />
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Column="0" Text="STAND RIGHT HERE" FontSize="{StaticResource PhoneFontSizeNormal}" FontWeight="SemiBold" VerticalAlignment="Center" Margin="12,8,0,8" />
+            
+            <Button Grid.Column="1" Content="ME" Command="{Binding UserCommand}" Visibility="{Binding User.IsLoggedIn, Converter={StaticResource VisibilityConverter}}" Style="{StaticResource BasicButtonStyle}" Padding="0" />
+            <Button Grid.Column="1" Content="JOIN" Command="{Binding JoinCommand}" Visibility="{Binding User.IsLoggedIn, Converter={StaticResource NegativeVisibilityConverter}}" Style="{StaticResource BasicButtonStyle}" Padding="0" />
+        </Grid>
+</UserControl>

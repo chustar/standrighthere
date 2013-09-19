@@ -97,11 +97,11 @@
     <Compile Include="Challenge.xaml.cs">
       <DependentUpon>Challenge.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ChallengeList.xaml.cs">
-      <DependentUpon>ChallengeList.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ChallengeListControl.xaml.cs">
       <DependentUpon>ChallengeListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\HeaderControl.xaml.cs">
+      <DependentUpon>HeaderControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\UserDetailsControl.xaml.cs">
       <DependentUpon>UserDetailsControl.xaml</DependentUpon>
@@ -146,11 +146,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ChallengeList.xaml">
+    <Page Include="Controls\ChallengeListControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChallengeListControl.xaml">
+    <Page Include="Controls\HeaderControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
