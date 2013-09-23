@@ -19,6 +19,7 @@
         <utilities:NegativeVisibilityConverter x:Key="NegativeVisibilityConverter" />
 
         <SolidColorBrush Color="LightGray" x:Key="Background" />
+        <SolidColorBrush Color="Gray" x:Key="Chrome" />
         
         <sys:Double p1:Key="PanoramaItemHeaderFontSize">66</sys:Double>
 
@@ -31,7 +32,7 @@
         <Style TargetType="TextBlock" x:Name="TextboxTitleStyle">
             <Setter Property="Margin" Value="12,0,0,-8" />
             <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}" />
-            <Setter Property="Foreground" Value="Gray" />
+            <Setter Property="Foreground" Value="{StaticResource Chrome}" />
         </Style>
 
         <Style TargetType="Button" x:Name="ActionButton">

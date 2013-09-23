@@ -9,6 +9,7 @@
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:Controls="clr-namespace:standrighthere.Controls"
     xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls.Binding;assembly=Coding4Fun.Toolkit.Controls"
+    xmlns:controls="clr-namespace:standrighthere.Controls"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -16,15 +17,14 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
-    <Grid x:Name="LayoutRoot" Background="LightGray">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <Grid Grid.Row="0" Background="Gray" Height="56">
-            <TextBlock Grid.Column="0" Text="STAND RIGHT HERE" FontSize="{StaticResource PhoneFontSizeNormal}" FontWeight="SemiBold" VerticalAlignment="Center" Margin="12,8,0,8" />
-        </Grid>
+        <controls:HeaderControl Grid.Row="0" />
+
         <ScrollViewer x:Name="ScrollView" Grid.Row="1">
             <phone:Pivot x:Name="PivotControl">
                 <phone:PivotItem Header="register">
