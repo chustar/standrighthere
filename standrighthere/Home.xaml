@@ -24,7 +24,7 @@
     </shell:SystemTray.ProgressIndicator>
     
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="{StaticResource Background}" ScrollViewer.VerticalScrollBarVisibility="Auto">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource BackgroundBrush}" ScrollViewer.VerticalScrollBarVisibility="Auto">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -44,7 +44,7 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" BackgroundColor="Gray">
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" BackgroundColor="{StaticResource ChromeColor}">
             <shell:ApplicationBarIconButton IconUri="Toolkit.Content/feature.camera.png" Text="new challenge" Click="NewChallenge_Click" />
             <shell:ApplicationBarIconButton IconUri="Toolkit.Content/refresh.png" Text="refresh" Click="Refresh_Click" />
             <shell:ApplicationBar.MenuItems>

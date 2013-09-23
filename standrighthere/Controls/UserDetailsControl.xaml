@@ -12,7 +12,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     >
-    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneBackgroundBrush}">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource BackgroundBrush}">
         <StackPanel>
             <StackPanel>
                 <TextBlock Text="{Binding Username}" FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}" />

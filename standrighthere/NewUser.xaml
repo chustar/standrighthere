@@ -17,7 +17,7 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
-    <Grid x:Name="LayoutRoot" Background="{StaticResource Background}">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource BackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>

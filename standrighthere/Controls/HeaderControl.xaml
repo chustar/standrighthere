@@ -9,7 +9,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480">
     
-        <Grid Background="Gray" Height="56">
+        <Grid Background="{StaticResource ChromeBrush}" Height="56">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="124" />
