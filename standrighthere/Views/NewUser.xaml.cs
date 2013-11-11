@@ -13,7 +13,7 @@ using Parse;
 using Windows.UI.ViewManagement;
 using standrighthere.ViewModels;
 
-namespace standrighthere
+namespace standrighthere.Views
 {
     public partial class NewUser : PhoneApplicationPage
     {

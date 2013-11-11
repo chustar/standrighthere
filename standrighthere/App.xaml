@@ -18,9 +18,9 @@
         <utilities:VisibilityConverter x:Key="VisibilityConverter" />
         <utilities:NegativeVisibilityConverter x:Key="NegativeVisibilityConverter" />
 
-        <Color A="255" R="47" G="79" B="79" x:Key="ChromeColor" />
-        <Color A="255" R="119" G="136" B="153" x:Key="BackgroundColor" />
-        <Color A="255" R="173" G="216" B="230" x:Key="ButtonColor" />
+        <Color x:Key="ChromeColor">#2F4F4F</Color>
+        <Color x:Key="BackgroundColor">#778899</Color>
+        <Color x:Key="ButtonColor">#ADD8E6</Color>
         
         <SolidColorBrush Color="{StaticResource ChromeColor}" x:Key="ChromeBrush" />
         <SolidColorBrush Color="{StaticResource BackgroundColor}" x:Key="BackgroundBrush" />

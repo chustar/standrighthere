@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Parse;
 using Microsoft.Phone.Tasks;
 
-namespace standrighthere
+namespace standrighthere.Views
 {
     public partial class Home : PhoneApplicationPage
     {

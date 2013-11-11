@@ -8,7 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
-namespace standrighthere
+namespace standrighthere.Views
 {
     public partial class UserDetailsManager : PhoneApplicationPage
     {

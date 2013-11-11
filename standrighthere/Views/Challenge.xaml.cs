@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using Windows.Devices.Geolocation;
 
-namespace standrighthere
+namespace standrighthere.Views
 {
     public partial class Challenge : PhoneApplicationPage
     {

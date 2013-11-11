@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Windows.Devices.Geolocation;
 
-namespace standrighthere
+namespace standrighthere.Views
 {
     public partial class NewChallenge : PhoneApplicationPage
     {
