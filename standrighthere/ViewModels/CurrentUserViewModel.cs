@@ -15,24 +15,5 @@ namespace standrighthere.ViewModels
         {
         }
 
-        public bool IsLoggedIn
-        {
-            get
-            {
-                return null != _user;
-            }
-        }
-
-        public new string Username
-        {
-            get
-            {
-                if (null == _user)
-                {
-                    return "";
-                }
-                return base.Username;
-            }
-        }
     }
 }

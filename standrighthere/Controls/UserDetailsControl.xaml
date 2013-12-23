@@ -23,7 +23,7 @@
                     <toolkit:LayoutTransformer.LayoutTransform>
                         <RotateTransform Angle="270"/>
                     </toolkit:LayoutTransformer.LayoutTransform>
-                    <Grid Background="Red">
+                    <Grid Background="{StaticResource ChallengeImageBackgroundColorBrush}">
                         <TextBlock Text="submitted" FontSize="{StaticResource PhoneFontSizeLarge}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Grid>
                 </toolkit:LayoutTransformer>
@@ -35,7 +35,7 @@
                     <toolkit:LayoutTransformer.LayoutTransform>
                         <RotateTransform Angle="270"/>
                     </toolkit:LayoutTransformer.LayoutTransform>
-                    <Grid Background="Red">
+                    <Grid Background="{StaticResource ChallengeImageBackgroundColorBrush}">
                         <TextBlock Text="solved" FontSize="{StaticResource PhoneFontSizeLarge}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Grid>
                 </toolkit:LayoutTransformer>

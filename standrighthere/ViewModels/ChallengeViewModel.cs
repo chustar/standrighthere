@@ -13,13 +13,11 @@ using standrighthere.Interfaces;
 
 namespace standrighthere.ViewModels
 {
-    public partial class ChallengeViewModel : ILoadableViewModel, INotifyPropertyChanged
+    public partial class ChallengeViewModel : ILoadableViewModel
     {
         public ChallengeViewModel(ParseObject challengeObject)
         {
             _challengeObject = challengeObject;
-
-            var task = LoadData();
         }
 
         public UserViewModel User { get; set; }
@@ -90,37 +88,21 @@ namespace standrighthere.ViewModels
         /// <returns>An awaitable task.</returns>
         protected async override Task LoadDataImpl(bool forceReload = false)
         {
-            if (forceReload || (!IsDataLoading && !IsDataLoaded))
-            {
-                IsDataLoading = true;
+            IsDataLoading = true;
 
-                User = new UserViewModel(_challengeObject.Get<ParseUser>("user") as ParseUser);
-                var userTask = User.LoadData();
-                var solvedCountTask = (from challenge in ParseObject.GetQuery("Challenge")
-                                     where challenge.Get<ParseUser>("user") == _challengeObject.Get<ParseUser>("user")
-                                     select challenge).CountAsync();
-                var commentsTask = CommentListViewModel.LoadData();
+            User = new UserViewModel(_challengeObject.Get<ParseUser>("user") as ParseUser);
+            await User.LoadData();//true);
+            SolvedCount = await (from challenge in ParseObject.GetQuery("UserChallengesSolved")
+                                   where challenge.Get<ParseUser>("user") == _challengeObject.Get<ParseUser>("user")
+                                   select challenge).CountAsync();
 
-                await Task.WhenAll(userTask, solvedCountTask, commentsTask);
-                SolvedCount = solvedCountTask.Result;
-                NotifyPropertyChanged("User");
-                NotifyPropertyChanged("SolvedCount");
+            NotifyPropertyChanged("User");
+            NotifyPropertyChanged("SolvedCount");
 
-                IsDataLoading = false;
-                IsDataLoaded = true;
-            }
+            IsDataLoading = false;
+            IsDataLoaded = true;
         }
 
         private ParseObject _challengeObject;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (null != handler)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
     }
 }

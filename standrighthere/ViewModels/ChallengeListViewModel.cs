@@ -49,7 +49,7 @@ namespace standrighthere.ViewModels
                 Challenges.Add(challengeViewModel);
                 challengeTasks.Add(challengeViewModel.LoadData());
             }
-            Task.WaitAll(challengeTasks.ToArray());
+            await Task.WhenAll(challengeTasks.ToArray());
 
             CurrentlyLoaded += 20;
         }

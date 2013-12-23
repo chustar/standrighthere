@@ -15,15 +15,15 @@ using System.Windows.Navigation;
 
 namespace standrighthere.ViewModels
 {
-    public partial class MainViewModel : ILoadableViewModel, INotifyPropertyChanged
+    public partial class MainViewModel : ILoadableViewModel
     {
         public MainViewModel()
         {
-            User = new CurrentUserViewModel(ParseUser.CurrentUser);
+            User = new UserViewModel(ParseUser.CurrentUser);
             ChallengeListViewModel = new ChallengeListViewModel();
         }
 
-        public CurrentUserViewModel User { get; private set; }
+        public UserViewModel User { get; private set; }
 
         private SimpleCommand _userCommand;
         public SimpleCommand UserCommand
@@ -52,7 +52,7 @@ namespace standrighthere.ViewModels
                     _joinCommand = new SimpleCommand(
                         (object parameter) =>
                         {
-                            App.RootFrame.Navigate(new Uri("/NewUser.xaml", UriKind.Relative));
+                            App.RootFrame.Navigate(new Uri("/Views/NewUser.xaml", UriKind.Relative));
                         });
                 }
                 return _joinCommand;
@@ -66,16 +66,6 @@ namespace standrighthere.ViewModels
             var userTask = User.LoadData(forceReload);
             var challengeTask = ChallengeListViewModel.LoadData();
             await Task.WhenAll(userTask, challengeTask);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (null != handler)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
     }
 }

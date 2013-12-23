@@ -36,19 +36,19 @@ namespace standrighthere.Utilities
             }
             else if (minutes < 60 * 48)
             {
-                return Math.Round(new decimal((minutes / 60))).ToString() + " hours";
+                return Math.Ceiling(new decimal((minutes / 60))).ToString() + " hours";
             }
             else if (minutes < 60 * 48 * 31)
             {
-                return Math.Round(new decimal((minutes / 1440))).ToString() + " days";
+                return Math.Ceiling(new decimal((minutes / 1440))).ToString() + " days";
             }
             else if (minutes < 60 * 48 * 31 * 12)
             {
-                return Math.Round(new decimal((minutes / (60 * 24 * 31 * 12)))).ToString() + " months";
+                return Math.Ceiling(new decimal((minutes / (60 * 24 * 31 * 12)))).ToString() + " months";
             }
             else 
             {
-                return Math.Round(new decimal((minutes / (60 * 24 * 31 * 12)))).ToString() + "years";
+                return Math.Ceiling(new decimal((minutes / (60 * 24 * 31 * 12)))).ToString() + "years";
             }
         }
     }

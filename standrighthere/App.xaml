@@ -21,10 +21,14 @@
         <Color x:Key="ChromeColor">#2F4F4F</Color>
         <Color x:Key="BackgroundColor">#778899</Color>
         <Color x:Key="ButtonColor">#ADD8E6</Color>
-        
+        <Color x:Key="ChallengeItemBackgroundColor">#80A5B0</Color>
+        <Color x:Key="ChallengeImageBackgroundColor">#808BB0</Color>
+
         <SolidColorBrush Color="{StaticResource ChromeColor}" x:Key="ChromeBrush" />
         <SolidColorBrush Color="{StaticResource BackgroundColor}" x:Key="BackgroundBrush" />
         <SolidColorBrush Color="{StaticResource ButtonColor}" x:Key="ButtonBrush" />
+        <SolidColorBrush Color="{StaticResource ChallengeItemBackgroundColor}" x:Key="ChallengeItemBackgroundColorBrush" />
+        <SolidColorBrush Color="{StaticResource ChallengeImageBackgroundColor}" x:Key="ChallengeImageBackgroundColorBrush" />
         
         <sys:Double p1:Key="PanoramaItemHeaderFontSize">66</sys:Double>
 

@@ -9,7 +9,7 @@ using standrighthere.Interfaces;
 
 namespace standrighthere.ViewModels
 {
-    public partial class UserViewModel : ILoadableViewModel, INotifyPropertyChanged
+    public partial class UserViewModel : ILoadableViewModel
     {
         public UserViewModel(ParseUser user)
         {
@@ -17,11 +17,19 @@ namespace standrighthere.ViewModels
             var task = LoadData();
         }
 
+        public bool IsLoggedIn
+        {
+            get
+            {
+                return null != _user;
+            }
+        }
+
         public string Username
         {
             get
             {
-                return _user.Username;
+                return (null == _user ? "" : _user.Username);
             }
         }
 
@@ -55,25 +63,24 @@ namespace standrighthere.ViewModels
         
         protected async override Task LoadDataImpl(bool forceReload = false)
         {
-            _submittedCount = await (from challenge in ParseObject.GetQuery("Challenge")
+            if (null == _user) return;
+            var userFetchTask = _user.FetchIfNeededAsync();
+            var submittedCountTask = (from challenge in ParseObject.GetQuery("Challenge")
                                     where challenge.Get<ParseUser>("user") == _user
                                     select challenge).CountAsync();
-            NotifyPropertyChanged("SubmittedCount");
 
-            _solvedCount = await (from challenge in ParseObject.GetQuery("UserChallengeSolved")
-                                 where challenge.Get<ParseUser>("user").Username == _user.Username
+            var solvedCountTask = (from challenge in ParseObject.GetQuery("UserChallengeSolved")
+                                 where challenge.Get<ParseUser>("user") == _user
                                  select challenge).CountAsync();
-            NotifyPropertyChanged("SolvedCount");
-        }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (null != handler)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
+            await Task.WhenAll(userFetchTask, submittedCountTask, solvedCountTask);
+
+            _user = userFetchTask.Result;
+            _submittedCount = submittedCountTask.Result;
+            _solvedCount = solvedCountTask.Result;
+            NotifyPropertyChanged("Username");
+            NotifyPropertyChanged("SubmittedCount");
+            NotifyPropertyChanged("SolvedCount");
         }
 
         protected ParseUser _user;

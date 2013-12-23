@@ -38,7 +38,7 @@ namespace standrighthere.Controls
             if ((sender as LongListSelector).SelectedItem != null)
             {
                 App.CurrentChallenge = (sender as LongListSelector).SelectedItem as ChallengeViewModel;
-                App.RootFrame.Navigate(new System.Uri(string.Format("/Challenge.xaml"), System.UriKind.Relative));
+                App.RootFrame.Navigate(new System.Uri(string.Format("/Views/Challenge.xaml"), System.UriKind.Relative));
                 (sender as LongListSelector).SelectedItem = null;
             }
         }
