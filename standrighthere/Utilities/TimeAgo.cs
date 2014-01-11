@@ -26,30 +26,42 @@ namespace standrighthere.Utilities
 
         static string DistanceOfTimeInWords(double minutes)
         {
+            decimal value = 0;
+            string suffix = string.Empty;
+
             if (minutes < 1)
             {
-                return "now";
+                suffix = "now";
             }
             else if (minutes < 60)
             {
-                return (int)minutes + " mins";
+
+                value = (int)minutes;
+                suffix = "min";
             }
             else if (minutes < 60 * 48)
             {
-                return Math.Ceiling(new decimal((minutes / 60))).ToString() + " hours";
+                value = Math.Ceiling(new decimal((minutes / 60)));
+                suffix = "hour";
             }
             else if (minutes < 60 * 48 * 31)
             {
-                return Math.Ceiling(new decimal((minutes / 1440))).ToString() + " days";
+                value = Math.Ceiling(new decimal((minutes / 1440)));
+                suffix = "day";
             }
             else if (minutes < 60 * 48 * 31 * 12)
             {
-                return Math.Ceiling(new decimal((minutes / (60 * 24 * 31 * 12)))).ToString() + " months";
+                value = Math.Ceiling(new decimal((minutes / (60 * 24 * 31 * 12))));
+                suffix = "month";
             }
             else 
             {
-                return Math.Ceiling(new decimal((minutes / (60 * 24 * 31 * 12)))).ToString() + "years";
+                value = Math.Ceiling(new decimal((minutes / (60 * 24 * 31 * 12))));
+                suffix = "year";
             }
+
+            return (value == 1 ? value + " " + suffix : value + " " + suffix + "s") + (value < 0 ? "" : " ago");
+
         }
     }
 }

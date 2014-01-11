@@ -46,6 +46,13 @@ namespace standrighthere.ViewModels
             }
         }
         
+        public double DistanceCount
+        {
+            get
+            {
+                return GeoLocationHelper.CachedLocation.ToParseGeoPoint().DistanceTo(Location).Miles;
+            }
+        }
         public string Distance
         {
             get

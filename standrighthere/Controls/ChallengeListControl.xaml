@@ -18,56 +18,20 @@
         <phone:LongListSelector Grid.Row="1" x:Name="Challenges" ItemsSource="{Binding Challenges}" ItemRealized="LongListSelector_ItemRealized" SelectionChanged="Challenges_SelectionChanged">
             <phone:LongListSelector.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="12,10,0,16" Height="120">
-                        <Grid>
-                            <Image Source="{Binding Image}" Height="120" Width="120" />
-                            <StackPanel Background="{StaticResource ChallengeItemBackgroundColorBrush}" VerticalAlignment="Bottom">
-                                <TextBlock Text="{Binding Distance}" FontSize="{StaticResource PhoneFontSizeMedium}" Padding="4" />
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="12,10,0,16">
+                            <Image Source="{Binding Image}" Height="126" Width="126" />
+                            <StackPanel Margin="12,0,0,0">
+                                <TextBlock Text="{Binding Title}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" TextTrimming="WordEllipsis" FontWeight="Light" Margin="0" />
+                                <TextBlock Text="{Binding SolvedCount, StringFormat='solved {0} times'}" FontSize="{StaticResource PhoneFontSizeMedium}" Margin="0,-2" />
+                                <TextBlock Text="{Binding Distance, StringFormat='\{0} away'}" FontSize="{StaticResource PhoneFontSizeMedium}" TextTrimming="WordEllipsis" Foreground="{StaticResource PhoneAccentBrush}" Margin="0,-2" />
+                                <TextBlock DataContext="{Binding User}" Text="{Binding Username, StringFormat='created by {0}'}" FontSize="{StaticResource PhoneFontSizeSmall}" Foreground="{StaticResource PhoneSubtleBrush}" Margin="0,-2" />
                             </StackPanel>
-                        </Grid>
-                        <Grid Margin="12,0,0,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="52" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" Margin="0" Text="{Binding Title}" FontSize="{StaticResource PhoneFontSizeLarge}" TextTrimming="WordEllipsis" />
-                            <Grid Grid.Row="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="175" />
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                    <transformer:LayoutTransformer Width="30">
-                                        <transformer:LayoutTransformer.LayoutTransform>
-                                            <RotateTransform Angle="270"/>
-                                        </transformer:LayoutTransformer.LayoutTransform>
-                                        <Grid Background="{StaticResource ChallengeItemBackgroundColorBrush}">
-                                            <TextBlock Text="solved" FontSize="{StaticResource PhoneFontSizeSmall}" HorizontalAlignment="Center" Padding="4" Margin="0,-3,0,0" />
-                                        </Grid>
-                                    </transformer:LayoutTransformer>
-                                    <TextBlock Text="{Binding SolvedCount}" FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}" Margin="12,-16,0,0" Width="120" />
-                                </StackPanel>
-                                <Grid Grid.Column="1" Margin="12,0,0,0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="30" />
-                                        <ColumnDefinition Width="160" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <transformer:LayoutTransformer Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
-                                        <transformer:LayoutTransformer.LayoutTransform>
-                                            <RotateTransform Angle="270"/>
-                                        </transformer:LayoutTransformer.LayoutTransform>
-                                        <Grid Background="{StaticResource ChallengeItemBackgroundColorBrush}">
-                                            <TextBlock Text="details" FontSize="{StaticResource PhoneFontSizeSmall}" HorizontalAlignment="Center" Padding="4" Margin="0,-3,0,0" />
-                                        </Grid>
-                                    </transformer:LayoutTransformer>
-                                    <TextBlock Grid.Row="0" Grid.Column="1" DataContext="{Binding User}" Text="{Binding Username}" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="10,4,0,0" />
-                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding CreatedRelative}" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="10,4,0,0" />
-                                </Grid>
-                            </Grid>
+                        </StackPanel>
+                        <Grid Background="Red">
+                            <StackPanel Background="Green" Width="{Binding DistanceCount}">
+                                <TextBlock Text="{Binding Distance, StringFormat='\{0} away'}" FontSize="{StaticResource PhoneFontSizeSmall}" />
+                            </StackPanel>
                         </Grid>
                     </StackPanel>
                 </DataTemplate>
