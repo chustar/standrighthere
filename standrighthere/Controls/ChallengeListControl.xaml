@@ -15,25 +15,15 @@
     d:DesignHeight="480" d:DesignWidth="480">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <phone:LongListSelector Grid.Row="1" x:Name="Challenges" ItemsSource="{Binding Challenges}" ItemRealized="LongListSelector_ItemRealized" SelectionChanged="Challenges_SelectionChanged">
+        <phone:LongListSelector Grid.Row="1" x:Name="Challenges" ItemsSource="{Binding Challenges}" ItemRealized="LongListSelector_ItemRealized" SelectionChanged="Challenges_SelectionChanged" LayoutMode="Grid" GridCellSize="232,232">
             <phone:LongListSelector.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="12,10,0,16">
-                            <Image Source="{Binding Image}" Height="126" Width="126" />
-                            <StackPanel Margin="12,0,0,0">
-                                <TextBlock Text="{Binding Title}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" TextTrimming="WordEllipsis" FontWeight="Light" Margin="0" />
-                                <TextBlock Text="{Binding SolvedCount, StringFormat='solved {0} times'}" FontSize="{StaticResource PhoneFontSizeMedium}" Margin="0,-2" />
-                                <TextBlock Text="{Binding Distance, StringFormat='\{0} away'}" FontSize="{StaticResource PhoneFontSizeMedium}" TextTrimming="WordEllipsis" Foreground="{StaticResource PhoneAccentBrush}" Margin="0,-2" />
-                                <TextBlock DataContext="{Binding User}" Text="{Binding Username, StringFormat='created by {0}'}" FontSize="{StaticResource PhoneFontSizeSmall}" Foreground="{StaticResource PhoneSubtleBrush}" Margin="0,-2" />
-                            </StackPanel>
+                    <Grid Margin="15">
+                        <Image Source="{Binding Image}" Height="225" Width="225" />
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Background="{StaticResource ChallengeItemBackgroundColorBrush}">
+                            <TextBlock Text="{Binding Title}" FontSize="{StaticResource PhoneFontSizeMedium}" TextTrimming="WordEllipsis" Margin="5" />
                         </StackPanel>
-                        <Grid Background="Red">
-                            <StackPanel Background="Green" Width="{Binding DistanceCount}">
-                                <TextBlock Text="{Binding Distance, StringFormat='\{0} away'}" FontSize="{StaticResource PhoneFontSizeSmall}" />
-                            </StackPanel>
-                        </Grid>
-                    </StackPanel>
+                    </Grid>
                 </DataTemplate>
             </phone:LongListSelector.ItemTemplate>
         </phone:LongListSelector>
