@@ -15,7 +15,7 @@
     d:DesignHeight="480" d:DesignWidth="480">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <phone:LongListSelector Grid.Row="1" x:Name="Challenges" ItemsSource="{Binding Challenges}" ItemRealized="LongListSelector_ItemRealized" SelectionChanged="Challenges_SelectionChanged" LayoutMode="Grid" GridCellSize="232,232">
+        <phone:LongListSelector Grid.Row="1" x:Name="Challenges" ItemsSource="{Binding Challenges}"  LayoutMode="Grid" GridCellSize="232,232" ItemRealized="LongListSelector_ItemRealized" SelectionChanged="Challenges_SelectionChanged">
             <phone:LongListSelector.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="15">

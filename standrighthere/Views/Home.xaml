@@ -17,6 +17,9 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
     shell:SystemTray.Opacity="1"
+    xmlns:test="clr-namespace:Test"
+    d:DataContext="{Binding Source={d:DesignInstance Type=test:DesignTimeData, IsDesignTimeCreatable=True}}"
+    mc:Ignorable="d"
     >
     
     <shell:SystemTray.ProgressIndicator>
