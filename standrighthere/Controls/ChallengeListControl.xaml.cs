@@ -75,7 +75,7 @@ namespace Test
         {
             return new List<FakeCat>
                        {
-                           new FakeCat {Title = "Name goes here", Image = "../Assets/fakeCat.png"},
+                           new FakeCat {Title = "Name goes here", Image = "http://farm8.staticflickr.com/7343/11914204134_8de5a28ff7_z.jpg"},
                            new FakeCat {Title = "Name goes here", Image = "../Assets/fakeCat.png"},
                            new FakeCat {Title = "Name goes here", Image = "../Assets/fakeCat.png"},
                            new FakeCat {Title = "Name goes here", Image = "../Assets/fakeCat.png"},
