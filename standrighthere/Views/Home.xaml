@@ -17,8 +17,8 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
     shell:SystemTray.Opacity="1"
-    xmlns:test="clr-namespace:Test"
-    d:DataContext="{Binding Source={d:DesignInstance Type=test:DesignTimeData, IsDesignTimeCreatable=True}}"
+    xmlns:design="clr-namespace:standrighthere.DesignData"
+    d:DataContext="{Binding Source={d:DesignInstance Type=design:MainViewModel, IsDesignTimeCreatable=True}}"
     mc:Ignorable="d"
     >
     

@@ -12,16 +12,19 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="480" d:DesignWidth="480">
+    xmlns:design="clr-namespace:standrighthere.DesignData"
+    d:DataContext="{Binding Source={d:DesignInstance Type=design:ChallengeListViewModel, IsDesignTimeCreatable=True}}"
+    d:DesignWidth="480"
+    >
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <phone:LongListSelector Grid.Row="1" x:Name="Challenges" ItemsSource="{Binding Challenges}"  LayoutMode="Grid" GridCellSize="232,232" ItemRealized="LongListSelector_ItemRealized" SelectionChanged="Challenges_SelectionChanged">
+        <phone:LongListSelector x:Name="Challenges" ItemsSource="{Binding Challenges}" LayoutMode="List" ItemRealized="LongListSelector_ItemRealized" SelectionChanged="Challenges_SelectionChanged" Margin="0">
             <phone:LongListSelector.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="15">
-                        <Image Source="{Binding Image}" Height="225" Width="225" />
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Background="{StaticResource ChallengeItemBackgroundColorBrush}">
-                            <TextBlock Text="{Binding Title}" FontSize="{StaticResource PhoneFontSizeMedium}" TextTrimming="WordEllipsis" Margin="5" />
+                    <Grid Margin="0">
+                        <Image Source="{Binding Image}" Height="480" Width="493" Stretch="Fill" Margin="0" />
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Background="{StaticResource ChallengeItemBackgroundColorBrush}" Margin="0">
+                            <TextBlock Text="{Binding Title}" FontSize="{StaticResource PhoneFontSizeSmall}" TextTrimming="WordEllipsis" Margin="0" />
                         </StackPanel>
                     </Grid>
                 </DataTemplate>

@@ -94,6 +94,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DesignData\ChallengeListViewModel.cs" />
+    <Compile Include="DesignData\ChallengeViewModel.cs" />
+    <Compile Include="DesignData\CommentListViewModel.cs" />
+    <Compile Include="DesignData\CommentViewModel.cs" />
+    <Compile Include="DesignData\MainViewModel.cs" />
+    <Compile Include="DesignData\NewUserViewModel.cs" />
+    <Compile Include="DesignData\UserViewModel.cs" />
     <Compile Include="Views\Challenge.xaml.cs">
       <DependentUpon>Challenge.xaml</DependentUpon>
     </Compile>
